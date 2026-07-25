@@ -127,12 +127,6 @@ const AdminLayout = () => {
       path: "/admin/banners",
     },
     {
-      key: "15",
-      icon: <ReadOutlined />,
-      label: "Tài liệu giải thích",
-      path: "/docs",
-    },
-    {
       key: "16",
       icon: <CarOutlined />,
       label: "Quản lý vận chuyển",
