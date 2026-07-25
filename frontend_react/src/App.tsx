@@ -19,6 +19,7 @@ import AboutUs from "./pages/about-us/about-us";
 import BrandManager from "./admin/brand/brand";
 import TagManager from "./admin/tag/tag";
 import BannerList from "./admin/banner/banner";
+import DocsPage from "./admin/docs/docs";
 import VerifyOtp from "./pages/verifyOTP/verifyOTP";
 import Search from "./pages/search/search";
 import NotFound from "./pages/404/404"; // Import trang 404
@@ -92,6 +93,14 @@ function App() {
         { path: "banners", element: <BannerList /> },
         { path: "users", element: <UserList /> },
       ],
+    },
+    {
+      path: "/docs",
+      element: (
+        <ProtectedRoute path="/docs">
+          <DocsPage />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "",
