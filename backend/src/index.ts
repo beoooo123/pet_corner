@@ -13,6 +13,14 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import brandRouter from './routes/brand.routes.js';
 import tagRouter from './routes/tag.routes.js';
 import bannerRouter from './routes/banner.routes.js';
+import couponRouter from './routes/coupon.routes.js';
+import orderRouter from './routes/order.routes.js';
+import orderDetailRouter from './routes/orderDetail.routes.js';
+import paymentRouter from './routes/payment.routes.js';
+import paymentTypeRouter from './routes/paymentType.routes.js';
+import deliveryRouter from './routes/delivery.routes.js';
+import revenueRouter from './routes/revenue.routes.js';
+import rateRouter from './routes/rating.routes.js';
 
 dotenv.config(); // Đọc file .env
 
@@ -41,6 +49,14 @@ app.use('/api/v1', userRouter);
 app.use('/api/v1', brandRouter);
 app.use('/api/v1', tagRouter);
 app.use('/api/v1', bannerRouter);
+app.use('/api/v1', couponRouter);
+app.use('/api/v1', orderRouter);
+app.use('/api/v1', orderDetailRouter);
+app.use('/api/v1', paymentRouter);
+app.use('/api/v1', paymentTypeRouter);
+app.use('/api/v1', deliveryRouter);
+app.use('/api/v1', revenueRouter);
+app.use('/api/v1', rateRouter);
 
 app.use(errorHandler);
 

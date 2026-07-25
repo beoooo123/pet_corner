@@ -1,12 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Avatar, Card } from "antd";
-import { FaUser, FaEdit } from "react-icons/fa";
+import { FaUser, FaEdit, FaMoneyCheckAlt } from "react-icons/fa";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 import userApi from "../../api/userApi";
 import Account from "../../components/account";
 import Address from "../../components/address";
 import ChangePassword from "../../components/change-password";
+import OrderDetail from "../../components/orderDetail";
 
 interface User {
   _id: string;
@@ -97,6 +98,12 @@ export default function UserProfile() {
         >
           Đổi mật khẩu
         </div>
+        <div
+          className={`flex items-center gap-2 cursor-pointer ${type === "orders" ? "text-[#22A6DF]" : "text-gray-600"}`}
+          onClick={() => navigate("/userprofile/orders")}
+        >
+          <FaMoneyCheckAlt className="text-[#22A6DF]" /> Đơn mua
+        </div>
       </div>
     </Card>
   );
@@ -109,6 +116,7 @@ export default function UserProfile() {
           <Route path="account" element={<Account />} />
           <Route path="address" element={<Address />} />
           <Route path="change-password" element={<ChangePassword />} />
+          <Route path="orders" element={<OrderDetail />} />
           <Route path="*" element={<div>Trang không tồn tại</div>} />
         </Routes>
       </Card>

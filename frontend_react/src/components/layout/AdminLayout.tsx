@@ -10,16 +10,22 @@ import {
 } from "antd";
 import {
   UserOutlined,
+  SketchOutlined,
+  PieChartOutlined,
   AppstoreOutlined,
   ShoppingOutlined,
+  FileTextOutlined,
   LogoutOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   StarOutlined,
   TagOutlined,
   HomeOutlined,
+  DollarOutlined,
   PictureOutlined,
   ReadOutlined,
+  CarOutlined,
+  CreditCardOutlined,
 } from "@ant-design/icons";
 import { Outlet, useNavigate } from "react-router-dom";
 import React from "react";
@@ -97,6 +103,18 @@ const AdminLayout = () => {
   // Danh sách menu đầy đủ cho admin
   const adminMenuItems = [
     {
+      key: "1",
+      icon: <PieChartOutlined />,
+      label: "Dashboard",
+      path: "/admin/dashboard",
+    },
+    {
+      key: "2",
+      icon: <DollarOutlined />,
+      label: "Quản lý doanh thu",
+      path: "/admin/revenue",
+    },
+    {
       key: "3",
       icon: <AppstoreOutlined />,
       label: "Quản lý danh mục",
@@ -113,6 +131,18 @@ const AdminLayout = () => {
       icon: <ReadOutlined />,
       label: "Tài liệu giải thích",
       path: "/docs",
+    },
+    {
+      key: "16",
+      icon: <CarOutlined />,
+      label: "Quản lý vận chuyển",
+      path: "/admin/deliveries",
+    },
+    {
+      key: "17",
+      icon: <CreditCardOutlined />,
+      label: "Quản lý thanh toán",
+      path: "/admin/payment-types",
     },
     {
       key: "4",
@@ -133,16 +163,28 @@ const AdminLayout = () => {
       path: "/admin/tags",
     },
     {
+      key: "9",
+      icon: <FileTextOutlined />,
+      label: "Quản lý đơn hàng",
+      path: "/admin/orders",
+    },
+    {
       key: "12",
       icon: <UserOutlined />,
       label: "Quản lý người dùng",
       path: "/admin/users",
     },
+    {
+      key: "13",
+      icon: <SketchOutlined />,
+      label: "Quản lý mã giảm giá",
+      path: "/admin/coupon",
+    },
   ];
 
   // Danh sách menu cho employee (loại bỏ các menu nhạy cảm)
   const employeeMenuItems = adminMenuItems.filter((item) =>
-    ["1", "9", "3", "4", "5", "6", "7", "10", "14", "15", "16", "17"].includes(item.key)
+    ["1", "9", "3", "4", "7", "8", "14", "15", "16", "17"].includes(item.key)
   );
 
   // Chọn danh sách menu dựa trên vai trò

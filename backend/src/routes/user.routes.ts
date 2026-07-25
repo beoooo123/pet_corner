@@ -14,7 +14,8 @@ import {
   changePassword,
   getNewUsers,
   healthyCheck,
-  setDefaultAddress
+  setDefaultAddress,
+  getLoyalUsers
 } from '../controllers/user.controllers.js';
 import { verifyToken } from '../middlewares/verifyToken.js';
 import uploader from '../config/cloudinary.config.js';
@@ -24,6 +25,7 @@ import { verify } from 'crypto';
 userRouter.get('/users/health', healthyCheck)
 userRouter.get('/users', verifyToken, getAllUser);
 userRouter.get('/users/new', verifyToken, getNewUsers);
+userRouter.get('/users/loyal', verifyToken, getLoyalUsers);
 userRouter.patch('/users/:id', verifyToken, uploader.single('avatar'), updateUser);
 userRouter.patch('/users/self/cart', verifyToken, updateCart);
 userRouter.get('/users/:id', verifyToken, getUserById);

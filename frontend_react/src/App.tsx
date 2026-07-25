@@ -23,6 +23,15 @@ import DocsPage from "./admin/docs/docs";
 import VerifyOtp from "./pages/verifyOTP/verifyOTP";
 import Search from "./pages/search/search";
 import NotFound from "./pages/404/404"; // Import trang 404
+import Dashboard from "./admin/dashboard/dashboard";
+import Revenue from "./admin/revenue/revenue";
+import CouponList from "./admin/coupon/coupon";
+import DeliveryList from "./admin/delivery/delivery";
+import PaymentTypeList from "./admin/paymentType/paymentType";
+import OrderList from "./admin/order/order";
+import Payment from "./pages/payment/payment";
+import CancelPage from "./pages/orders/cancel";
+import SuccessPage from "./pages/orders/success";
 
 interface User {
   id: string;
@@ -85,12 +94,18 @@ function App() {
         </ProtectedRoute>
       ),
       children: [
-        { path: "", element: <CategoryList /> },
+        { path: "", element: <Dashboard /> },
+        { path: "dashboard", element: <Dashboard /> },
+        { path: "revenue", element: <Revenue /> },
         { path: "categories", element: <CategoryList /> },
         { path: "products", element: <ProductList /> },
         { path: "brands", element: <BrandManager /> },
         { path: "tags", element: <TagManager /> },
         { path: "banners", element: <BannerList /> },
+        { path: "coupon", element: <CouponList /> },
+        { path: "deliveries", element: <DeliveryList /> },
+        { path: "payment-types", element: <PaymentTypeList /> },
+        { path: "orders", element: <OrderList /> },
         { path: "users", element: <UserList /> },
       ],
     },
@@ -143,6 +158,30 @@ function App() {
           element: (
             <PublicRoute>
               <Cart />
+            </PublicRoute>
+          ),
+        },
+        {
+          path: "/checkout",
+          element: (
+            <PublicRoute>
+              <Payment />
+            </PublicRoute>
+          ),
+        },
+        {
+          path: "/cancel",
+          element: (
+            <PublicRoute>
+              <CancelPage />
+            </PublicRoute>
+          ),
+        },
+        {
+          path: "/success",
+          element: (
+            <PublicRoute>
+              <SuccessPage />
             </PublicRoute>
           ),
         },

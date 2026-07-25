@@ -4,6 +4,7 @@ import userModel from '../models/user.model.js';
 import mongoose from 'mongoose';
 import bcryptjs from 'bcryptjs';
 import { IAddress, IUser } from '../interfaces/user.interface.js';
+import orderModel from '../models/order.model.js';
 
 interface AuthenticatedRequest extends Request {
   user?: IUser;
@@ -491,3 +492,71 @@ export const setDefaultAddress = async (req: Request, res: Response): Promise<vo
   }
 };
 
+// người dùng thân thiết
+export const getLoyalUsers = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const loyalUsers = await orderModel.aggregate([
+      {
+        $match: {
+          status: 'DELIVERED',
+          userID: { $ne: null }
+        }
+      },
+      {
+        $lookup: {
+          from: 'orderdetails',
+          localField: '_id',
+          foreignField: 'orderId',
+          as: 'orderDetails'
+        }
+      },
+      {
+        $unwind: '$orderDetails'
+      },
+      {
+        $group: {
+          _id: '$userID',
+          totalQuantity: { $sum: '$orderDetails.quantity' },
+          fullname: { $first: '$inforUserGuest.fullName' }
+        }
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: '_id',
+          foreignField: '_id',
+          as: 'userInfo'
+        }
+      },
+      {
+        $unwind: '$userInfo'
+      },
+      {
+        $project: {
+          _id: 0, // Loại bỏ _id của group
+          userId: '$_id',
+          fullname: { $ifNull: ['$userInfo.fullname', '$fullname', 'Khách vãng lai'] },
+          totalQuantity: 1,
+          email: '$userInfo.email',
+          createdAt: '$userInfo.createdAt'
+          // Không cần khai báo password: 0 vì nó sẽ tự động bị loại bỏ
+        }
+      },
+      {
+        $sort: { totalQuantity: -1 }
+      },
+      {
+        $limit: 4
+      }
+    ]);
+
+    res.status(200).json({ success: true, result: loyalUsers });
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(`Error fetching loyal users: ${error.message}`);
+    } else {
+      console.error('Error fetching loyal users:', error);
+    }
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+};
