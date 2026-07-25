@@ -1,0 +1,62 @@
+[
+	{
+		"coupon_code": "GIAM10K",
+		"discount_value": 10000,
+		"min_order_value": 100000,
+		"max_discount": 50000,
+		"start_date": "2025-03-01",
+		"end_date": "2025-03-31",
+		"usage_limit": 100,
+		"used_count": 20,
+		"test": "test",
+		"status": "active"
+	},
+	{
+		"coupon_code": "FREESHIP",
+		"discount_value": 30000,
+		"min_order_value": 200000,
+		"max_discount": 30000,
+		"start_date": "2025-03-01",
+		"end_date": "2025-03-15",
+		"usage_limit": 50,
+		"used_count": 50,
+		"test": "test",
+		"status": "inactive"
+	},
+	{
+		"coupon_code": "SALE20",
+		"discount_value": 20000,
+		"min_order_value": 150000,
+		"max_discount": 40000,
+		"start_date": "2025-03-10",
+		"end_date": "2025-03-20",
+		"usage_limit": 80,
+		"used_count": 30,
+		"test": "test",
+		"status": "active"
+	},
+	{
+		"coupon_code": "GIAM50K",
+		"discount_value": 50000,
+		"min_order_value": 300000,
+		"max_discount": 50000,
+		"start_date": "2025-03-01",
+		"end_date": "2025-03-10",
+		"usage_limit": 30,
+		"used_count": 30,
+		"test": "test",
+		"status": "inactive"
+	},
+	{
+		"coupon_code": "TET2025",
+		"discount_value": 25000,
+		"min_order_value": 100000,
+		"max_discount": 60000,
+		"start_date": "2025-03-15",
+		"end_date": "2025-04-15",
+		"usage_limit": 200,
+		"used_count": 10,
+		"test": "test",
+		"status": "active"
+	}
+]
