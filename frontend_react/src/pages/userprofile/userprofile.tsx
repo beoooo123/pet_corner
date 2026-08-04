@@ -78,31 +78,31 @@ export default function UserProfile() {
       </div>
       <div className="space-y-2 text-lg text-gray-600">
         <div className="flex items-center gap-2">
-          <FaUser className="text-[#22A6DF]" /> Tài khoản của tôi
+          <FaUser className="text-[#FFA500]" /> Tài khoản của tôi
         </div>
         <div
-          className={`ml-7 cursor-pointer ${type === "account" ? "text-[#22A6DF]" : "text-gray-600"}`}
+          className={`ml-7 cursor-pointer ${type === "account" ? "text-[#FFA500]" : "text-gray-600"}`}
           onClick={() => navigate("/userprofile/account")}
         >
           Hồ sơ
         </div>
         <div
-          className={`ml-7 cursor-pointer ${type === "address" ? "text-[#22A6DF]" : "text-gray-600"}`}
+          className={`ml-7 cursor-pointer ${type === "address" ? "text-[#FFA500]" : "text-gray-600"}`}
           onClick={() => navigate("/userprofile/address")}
         >
           Địa chỉ
         </div>
         <div
-          className={`ml-7 cursor-pointer ${type === "change-password" ? "text-[#22A6DF]" : "text-gray-600"}`}
+          className={`ml-7 cursor-pointer ${type === "change-password" ? "text-[#FFA500]" : "text-gray-600"}`}
           onClick={() => navigate("/userprofile/change-password")}
         >
           Đổi mật khẩu
         </div>
         <div
-          className={`flex items-center gap-2 cursor-pointer ${type === "orders" ? "text-[#22A6DF]" : "text-gray-600"}`}
+          className={`flex items-center gap-2 cursor-pointer ${type === "orders" ? "text-[#FFA500]" : "text-gray-600"}`}
           onClick={() => navigate("/userprofile/orders")}
         >
-          <FaMoneyCheckAlt className="text-[#22A6DF]" /> Đơn mua
+          <FaMoneyCheckAlt className="text-[#FFA500]" /> Đơn mua
         </div>
       </div>
     </Card>

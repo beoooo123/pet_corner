@@ -277,7 +277,7 @@ export default function SignUp() {
                 "Nhận nhiều ưu đãi",
               ].map((text, i) => (
                 <li key={i} className="flex items-center gap-2">
-                  <FaCheckDouble className="h-3 w-3 text-[#22A6DF] sm:h-4 sm:w-4" />
+                  <FaCheckDouble className="h-3 w-3 text-[#FFA500] sm:h-4 sm:w-4" />
                   <span>{text}</span>
                 </li>
               ))}
@@ -290,11 +290,11 @@ export default function SignUp() {
             <div className="mb-3 flex h-10 sm:h-12">
               <button
                 onClick={() => navigate("/login")} // Dùng navigate thay window.location.href
-                className="h-full w-1/2 border border-[#686868] text-sm hover:border-[#22A6DF] hover:text-[#22A6DF] sm:text-base"
+                className="h-full w-1/2 border border-[#686868] text-sm hover:border-[#FFA500] hover:text-[#FFA500] sm:text-base"
               >
                 Đăng Nhập
               </button>
-              <button className="h-full w-1/2 border-[#22A6DF] bg-[#22A6DF] text-sm text-white sm:text-base">
+              <button className="h-full w-1/2 border-[#FFA500] bg-[#FFA500] text-sm text-white sm:text-base">
                 Đăng ký
               </button>
             </div>
@@ -370,7 +370,7 @@ export default function SignUp() {
               >
                 <button
                   onClick={handleSubmit}
-                  className="h-9 w-[46%] rounded-md bg-black text-xs text-white hover:bg-[#22A6DF] sm:h-10 sm:text-sm"
+                  className="h-9 w-[46%] rounded-md bg-black text-xs text-white hover:bg-[#FFA500] sm:h-10 sm:text-sm"
                   disabled={loading}
                 >
                   {loading ? "Đang xử lý..." : "Tạo tài khoản"}

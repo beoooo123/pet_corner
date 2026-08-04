@@ -160,7 +160,7 @@ export default function ChangePassword() {
                         <Item>
                             <Button
                                 htmlType="submit"
-                                className="w-1/3 bg-[#22A6DF] hover:bg-[#1890ff] rounded text-white"
+                                className="w-1/3 bg-[#FFA500] hover:bg-[#1890ff] rounded text-white"
                             >
                                 Cập nhật
                             </Button>

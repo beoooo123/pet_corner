@@ -193,7 +193,7 @@ export default function Home() {
           key={category._id}
           className=" mt-[30px] rounded-lg p-6 px-4 sm:px-[40px] lg:px-[154px]"
         >
-          <div className="mx-auto flex h-[50px] w-full max-w-[900px] items-center justify-center rounded-[40px] bg-[#22A6DF] text-base font-medium text-white md:text-lg">
+          <div className="mx-auto flex h-[50px] w-full max-w-[900px] items-center justify-center rounded-[40px] bg-[#FFA500] text-base font-medium text-white md:text-lg">
             MUA SẮM CHO {category.name.toUpperCase()}
           </div>
 
@@ -213,27 +213,7 @@ export default function Home() {
       {/* PetNews */}
       <div className="w-full bg-white p-3 sm:p-4 md:p-6 lg:p-8 xl:px-[154px]">
         {/* Brand Logos Section */}
-        <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:gap-6">
-          {[
-            { src: "/images/brands/royalcanin.png", alt: "Royal Canin" },
-            { src: "/images/brands/kitcat.png", alt: "Kit Cat" },
-            { src: "/images/brands/gimcat.png", alt: "Gim Cat" },
-            { src: "/images/brands/lapaw.png", alt: "LaPaw" },
-            { src: "/images/brands/tropiclean.png", alt: "TropiClean" },
-          ].map((brand, index) => (
-            <div
-              key={index}
-              className="group flex items-center justify-center p-2 transition-transform duration-300 hover:scale-105"
-            >
-              <img
-                src={brand.src}
-                alt={brand.alt}
-                className="h-auto max-h-[60px] w-auto object-contain sm:max-h-[80px] md:max-h-[100px]"
-                loading="lazy"
-              />
-            </div>
-          ))}
-        </div>
+        
       </div>
     </>
   );

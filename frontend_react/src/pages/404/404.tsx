@@ -10,7 +10,7 @@ const NotFound = () => {
       <div className="text-center">
         <div className="relative">
           <div className="flex justify-center items-center gap-4">
-            <span className="text-8xl font-bold text-[#22A6DF]">4</span>
+            <span className="text-8xl font-bold text-[#FFA500]">4</span>
             <div className="relative">
               {/* Main circle with shadow effect */}
               <motion.div
@@ -22,7 +22,7 @@ const NotFound = () => {
                   repeat: Infinity,
                   ease: "linear",
                 }}
-                className="w-32 h-32 bg-[#22A6DF] rounded-full relative"
+                className="w-32 h-32 bg-[#FFA500] rounded-full relative"
                 style={{
                   boxShadow:
                     "inset -4px -4px 8px rgba(0,0,0,0.2), inset 4px 4px 8px rgba(255,255,255,0.2)",
@@ -129,7 +129,7 @@ const NotFound = () => {
                 </motion.div>
               </div>
             </div>
-            <span className="text-8xl font-bold text-[#22A6DF]">4</span>
+            <span className="text-8xl font-bold text-[#FFA500]">4</span>
           </div>
         </div>
 
@@ -144,7 +144,7 @@ const NotFound = () => {
 
         <button
           onClick={() => navigate("/")} // Use navigate to go to the home page
-          className="mt-8 px-6 py-3 bg-[#22A6DF] text-white rounded-lg hover:bg-[#4ab7e6] transition-colors duration-200 shadow-lg hover:shadow-xl"
+          className="mt-8 px-6 py-3 bg-[#FFA500] text-white rounded-lg hover:bg-[#4ab7e6] transition-colors duration-200 shadow-lg hover:shadow-xl"
         >
           Về cửa hàng
         </button>

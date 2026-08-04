@@ -199,7 +199,7 @@ export default function Footer() {
             <Space className="mt-4 flex items-center justify-center gap-2 text-xs sm:text-sm lg:justify-start">
               <FaPhoneAlt className="text-black" />
               <Text strong>Hotline:</Text>
-              <a href="tel:0853665735" className="text-[#22A6DF]">
+              <a href="tel:0853665735" className="text-[#FFA500]">
                 0853665735
               </a>
             </Space>
@@ -221,7 +221,7 @@ export default function Footer() {
                   <Link
                     key={category._id}
                     to={`/product?category=${category.name.toLowerCase()}`}
-                    className="hover:text-[#22A6DF] transition-colors duration-300"
+                    className="hover:text-[#FFA500] transition-colors duration-300"
                   >
                     {category.name === "Chó" ? "Dành cho chó" : category.name === "Mèo" ? "Dành cho mèo" : category.name}
                   </Link>
@@ -296,10 +296,10 @@ export default function Footer() {
                 size="large"
                 className="mt-4 flex justify-center gap-5 lg:mt-[70px] lg:justify-start"
               >
-                <FaFacebookF className="cursor-pointer text-xl text-gray-600 hover:text-[#22A6DF] sm:text-2xl lg:text-[34px]" />
-                <FaInstagram className="cursor-pointer text-xl text-gray-600 hover:text-[#22A6DF] sm:text-2xl lg:text-[34px]" />
-                <FaTwitter className="cursor-pointer text-xl text-gray-600 hover:text-[#22A6DF] sm:text-2xl lg:text-[34px]" />
-                <FaPinterestP className="cursor-pointer text-xl text-gray-600 hover:text-[#22A6DF] sm:text-2xl lg:text-[34px]" />
+                <FaFacebookF className="cursor-pointer text-xl text-gray-600 hover:text-[#FFA500] sm:text-2xl lg:text-[34px]" />
+                <FaInstagram className="cursor-pointer text-xl text-gray-600 hover:text-[#FFA500] sm:text-2xl lg:text-[34px]" />
+                <FaTwitter className="cursor-pointer text-xl text-gray-600 hover:text-[#FFA500] sm:text-2xl lg:text-[34px]" />
+                <FaPinterestP className="cursor-pointer text-xl text-gray-600 hover:text-[#FFA500] sm:text-2xl lg:text-[34px]" />
               </Space>
             </div>
           </div>

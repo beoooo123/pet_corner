@@ -182,8 +182,8 @@ const Cart: React.FC = () => {
                         transition: "border 0.3s, color 0.3s",
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.color = "#22A6DF";
-                        e.currentTarget.style.border = "1px solid #22A6DF";
+                        e.currentTarget.style.color = "#FFA500";
+                        e.currentTarget.style.border = "1px solid #FFA500";
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.color = "#333";
@@ -231,7 +231,7 @@ const Cart: React.FC = () => {
                           </Button>
                         </div>
                         <div className="mt-3 flex items-center justify-between">
-                          <Text className="text-lg font-medium text-[#22A6DF]">
+                          <Text className="text-lg font-medium text-[#FFA500]">
                             {(item.price * item.quantity).toLocaleString()}đ
                           </Text>
                           <div className="flex items-center gap-2">
@@ -275,7 +275,7 @@ const Cart: React.FC = () => {
                     <Text strong className="text-gray-800">
                       Tạm tính
                     </Text>
-                    <Text strong className="text-xl text-[#22A6DF]">
+                    <Text strong className="text-xl text-[#FFA500]">
                       {calculateSubtotal().toLocaleString()}đ
                     </Text>
                   </div>
@@ -291,8 +291,8 @@ const Cart: React.FC = () => {
                     size="large"
                     block
                     style={{
-                      backgroundColor: "#22A6DF",
-                      borderColor: "#22A6DF",
+                      backgroundColor: "#FFA500",
+                      borderColor: "#FFA500",
                     }}
                     onClick={handleCheckout}
                   >
@@ -308,8 +308,8 @@ const Cart: React.FC = () => {
                       transition: "border 0.3s, color 0.3s",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = "#22A6DF";
-                      e.currentTarget.style.border = "1px solid #22A6DF";
+                      e.currentTarget.style.color = "#FFA500";
+                      e.currentTarget.style.border = "1px solid #FFA500";
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.color = "#333";

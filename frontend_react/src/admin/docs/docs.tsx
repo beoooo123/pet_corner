@@ -63,7 +63,7 @@ const markdownComponents = {
   p: (props: any) => (
     <p className="mb-3 text-sm leading-relaxed text-gray-700 sm:text-base" {...props} />
   ),
-  a: (props: any) => <a className="break-words text-[#22A6DF] hover:underline" {...props} />,
+  a: (props: any) => <a className="break-words text-[#FFA500] hover:underline" {...props} />,
   li: (props: any) => (
     <li className="mb-1 ml-4 text-sm list-disc leading-relaxed sm:text-base" {...props} />
   ),
@@ -98,7 +98,7 @@ const markdownComponents = {
   ),
   blockquote: (props: any) => (
     <blockquote
-      className="mb-4 border-l-4 border-[#22A6DF] bg-blue-50 py-2 pl-4 text-gray-700"
+      className="mb-4 border-l-4 border-[#FFA500] bg-blue-50 py-2 pl-4 text-gray-700"
       {...props}
     />
   ),
@@ -112,7 +112,7 @@ const DocsPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50 p-3 sm:p-6">
       <Link
         to="/admin"
-        className="mb-3 inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-[#22A6DF] sm:mb-4"
+        className="mb-3 inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-[#FFA500] sm:mb-4"
       >
         <ArrowLeftOutlined /> Quay lại trang quản trị
       </Link>
@@ -142,8 +142,8 @@ const DocsPage: React.FC = () => {
                 onClick={() => setSelectedKey(f.key)}
                 className={`flex-shrink-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-xs font-medium transition-colors sm:text-sm ${
                   selectedKey === f.key
-                    ? "border-[#22A6DF] bg-[#22A6DF] text-white"
-                    : "border-gray-300 text-gray-600 hover:border-[#22A6DF] hover:text-[#22A6DF]"
+                    ? "border-[#FFA500] bg-[#FFA500] text-white"
+                    : "border-gray-300 text-gray-600 hover:border-[#FFA500] hover:text-[#FFA500]"
                 }`}
               >
                 {f.label}

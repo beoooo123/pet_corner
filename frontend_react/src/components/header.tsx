@@ -322,7 +322,7 @@ export default function Header() {
                     className="w-full h-32 object-cover mb-2"
                   />
                   <p className="text-sm font-medium">{product.name}</p>
-                  <p className="text-[#22A6DF] font-bold">
+                  <p className="text-[#FFA500] font-bold">
                     {new Intl.NumberFormat("vi-VN", {
                       style: "currency",
                       currency: "VND",
@@ -398,7 +398,7 @@ export default function Header() {
                   className="w-full h-32 object-cover mb-2"
                 />
                 <p className="text-sm font-medium">{product.name}</p>
-                <p className="text-[#22A6DF] font-bold">
+                <p className="text-[#FFA500] font-bold">
                   {new Intl.NumberFormat("vi-VN", {
                     style: "currency",
                     currency: "VND",
@@ -431,7 +431,7 @@ export default function Header() {
   return (
     <>
       <header className="w-full">
-        <div className="flex h-[34px] items-center justify-center bg-[#22A6DF] px-4 text-[10px] text-white sm:h-[34px] sm:px-[40px] sm:text-xs lg:px-[154px] lg:text-sm">
+        <div className="flex h-[34px] items-center justify-center bg-[#FFA500] px-4 text-[10px] text-white sm:h-[34px] sm:px-[40px] sm:text-xs lg:px-[154px] lg:text-sm">
           <div className="flex items-center gap-1 text-xs sm:text-xs">
             <div className="flex items-center rounded-xl bg-black px-2 py-1 font-semibold">
               %15 Off
@@ -462,8 +462,8 @@ export default function Header() {
               enterButton={
                 <button
                   style={{
-                    backgroundColor: "#22A6DF",
-                    borderColor: "#22A6DF",
+                    backgroundColor: "#FFA500",
+                    borderColor: "#FFA500",
                     height: "32px",
                     width: "32px",
                     display: "flex",
@@ -486,14 +486,14 @@ export default function Header() {
 
           <Space size={50} className="hidden xl:flex">
             <div className="flex flex-col items-center">
-              <FaGift className="text-2xl text-[#22A6DF]" />
+              <FaGift className="text-2xl text-[#FFA500]" />
               <span>Miễn phí vận chuyển</span>
               <span className="text-xs text-gray-500">
                 Cho đơn từ 200.000đ
               </span>
             </div>
             <div className="flex flex-col items-center">
-              <FaCheckCircle className="text-2xl text-[#22A6DF]" />
+              <FaCheckCircle className="text-2xl text-[#FFA500]" />
               <span>Cam kết chất lượng</span>
               <span className="text-xs text-gray-500">Đổi trả trong 30 ngày</span>
             </div>
@@ -508,14 +508,14 @@ export default function Header() {
                   <Avatar
                     src={user.avatar ? `${user.avatar}` : undefined}
                     icon={!user.avatar && <UserOutlined />}
-                    className="bg-[#22A6DF]"
+                    className="bg-[#FFA500]"
                   />
-                  <FaAngleDown className="ml-1 text-[#22A6DF]" />
+                  <FaAngleDown className="ml-1 text-[#FFA500]" />
                 </div>
               </Dropdown>
             ) : (
               <a href="/login">
-                <Avatar icon={<UserOutlined />} className="bg-[#22A6DF]" />
+                <Avatar icon={<UserOutlined />} className="bg-[#FFA500]" />
               </a>
             )}
           </Space>
@@ -538,14 +538,14 @@ export default function Header() {
                   <Avatar
                     src={user.avatar ? `${user.avatar}` : undefined}
                     icon={!user.avatar && <UserOutlined />}
-                    className="bg-[#22A6DF]"
+                    className="bg-[#FFA500]"
                   />
-                  <FaAngleDown className="ml-1 text-[#22A6DF]" />
+                  <FaAngleDown className="ml-1 text-[#FFA500]" />
                 </div>
               </Dropdown>
             ) : (
               <a href="/login">
-                <Avatar icon={<UserOutlined />} className="bg-[#22A6DF]" />
+                <Avatar icon={<UserOutlined />} className="bg-[#FFA500]" />
               </a>
             )}
           </Space>
@@ -557,13 +557,13 @@ export default function Header() {
               <a key={item.path} href={item.path} className="group relative">
                 <Typography.Text
                   className={`text-sm font-bold transition-colors duration-300 lg:text-sm xl:text-lg relative z-10 ${currentPath === item.path
-                      ? "text-[#22A6DF]"
-                      : "text-black group-hover:text-[#22A6DF]"
+                      ? "text-[#FFA500]"
+                      : "text-black group-hover:text-[#FFA500]"
                     }`}
                 >
                   {item.label}
                   <span
-                    className={`absolute bottom-0 left-0 h-[2px] bg-[#22A6DF] transition-all duration-300 ${currentPath === item.path
+                    className={`absolute bottom-0 left-0 h-[2px] bg-[#FFA500] transition-all duration-300 ${currentPath === item.path
                         ? "w-full"
                         : "w-0 group-hover:w-full"
                       }`}
@@ -577,7 +577,7 @@ export default function Header() {
 
           <Space className="whitespace-nowrap text-sm font-bold sm:text-xs lg:text-sm xl:text-base">
             <FaPhoneAlt className="mr-1" />
-            24/7 Hỗ trợ: <span className="ml-1 text-[#22A6DF]">0853665735</span>
+            24/7 Hỗ trợ: <span className="ml-1 text-[#FFA500]">0853665735</span>
           </Space>
         </nav>
 

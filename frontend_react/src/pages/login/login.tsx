@@ -355,17 +355,17 @@ export default function Login() {
             </Title>
             <ul className="list-disc space-y-2 pl-4 sm:space-y-4">
               <li className="flex items-center gap-2">
-                <FaCheckDouble className="h-3 w-3 shrink-0 text-[#22A6DF] sm:h-4 sm:w-4" />
+                <FaCheckDouble className="h-3 w-3 shrink-0 text-[#FFA500] sm:h-4 sm:w-4" />
                 <span>Mua hàng nhanh chóng, dễ dàng</span>
               </li>
               <li className="flex items-center gap-2">
-                <FaCheckDouble className="h-3 w-3 shrink-0 text-[#22A6DF] sm:h-4 sm:w-4" />
+                <FaCheckDouble className="h-3 w-3 shrink-0 text-[#FFA500] sm:h-4 sm:w-4" />
                 <span>
                   Theo dõi chi tiết đơn hàng, địa chỉ thanh toán dễ dàng
                 </span>
               </li>
               <li className="flex items-center gap-2">
-                <FaCheckDouble className="h-3 w-3 shrink-0 text-[#22A6DF] sm:h-4 sm:w-4" />
+                <FaCheckDouble className="h-3 w-3 shrink-0 text-[#FFA500] sm:h-4 sm:w-4" />
                 <span>Nhận nhiều chương trình ưu đãi từ chúng tôi</span>
               </li>
             </ul>
@@ -376,12 +376,12 @@ export default function Login() {
         <Col className="flex w-full flex-col justify-start shadow-inner lg:w-[400px] overflow-auto">
           <div>
             <div className="mb-3 flex h-10 sm:h-12">
-              <button className="h-full w-1/2 rounded-none border-[#22A6DF] bg-[#22A6DF] text-sm text-white sm:text-base">
+              <button className="h-full w-1/2 rounded-none border-[#FFA500] bg-[#FFA500] text-sm text-white sm:text-base">
                 Đăng Nhập
               </button>
               <button
                 onClick={() => navigate("/signup")} // Thay window.location.href
-                className="h-full w-1/2 rounded-none border border-[#686868] text-sm hover:border-[#22A6DF] hover:text-[#22A6DF] sm:text-base"
+                className="h-full w-1/2 rounded-none border border-[#686868] text-sm hover:border-[#FFA500] hover:text-[#FFA500] sm:text-base"
               >
                 Đăng Ký
               </button>
@@ -444,7 +444,7 @@ export default function Login() {
               <Button
                 type="primary"
                 size="large"
-                className="h-9 w-[46%] rounded-md bg-black text-xs text-white hover:bg-[#22A6DF] sm:h-10 sm:text-sm"
+                className="h-9 w-[46%] rounded-md bg-black text-xs text-white hover:bg-[#FFA500] sm:h-10 sm:text-sm"
                 onClick={handleLogin}
                 loading={loading}
               >

@@ -205,12 +205,12 @@ export default function Account() {
                         <Item name="birthDate" label={<span className="text-base font-semibold">Ngày sinh</span>}>
                             <DatePicker
                                 placeholder="Chọn ngày sinh"
-                                className="w-full rounded border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-[#22A6DF]"
+                                className="w-full rounded border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-[#FFA500]"
                                 format="DD-MM-YYYY"
                             />
                         </Item>
                             <Item>
-                                <Button htmlType="submit" className="w-1/4 bg-[#22A6DF] hover:bg-[#1890ff] rounded text-white mr-2" loading={uploading}>Lưu</Button>
+                                <Button htmlType="submit" className="w-1/4 bg-[#FFA500] hover:bg-[#1890ff] rounded text-white mr-2" loading={uploading}>Lưu</Button>
                                 <Button className="w-1/4 bg-gray-300 hover:bg-gray-400 rounded text-gray-700" onClick={handleCancel} disabled={uploading}>Hủy</Button>
                             </Item>
                     </Form>
@@ -220,7 +220,7 @@ export default function Account() {
                     <Upload {...uploadProps}>
                         <Button
                             icon={<UploadOutlined />}
-                            className="bg-[#22A6DF] text-white hover:bg-[#1890ff] rounded my-3"
+                            className="bg-[#FFA500] text-white hover:bg-[#1890ff] rounded my-3"
                         >
                             Chọn
                         </Button>

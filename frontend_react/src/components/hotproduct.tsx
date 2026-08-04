@@ -101,7 +101,7 @@ export default function HotProduct({ data }: { data: Product[] }) {
     <>
       {/* Header */}
       <div className="flex items-center justify-between">
-        <div className="relative ml-[15px] w-[200px] rounded-t-lg border-l border-r border-t border-[#22A6DF] px-2 py-2 sm:ml-[30px] sm:w-[250px] sm:px-4 md:w-[300px]">
+        <div className="relative ml-[15px] w-[200px] rounded-t-lg border-l border-r border-t border-[#FFA500] px-2 py-2 sm:ml-[30px] sm:w-[250px] sm:px-4 md:w-[300px]">
           <div className="absolute -top-7 left-3 z-10 bg-white px-2">
             <img
               src="/images/icons/paw.png"
@@ -120,14 +120,14 @@ export default function HotProduct({ data }: { data: Product[] }) {
             shape="circle"
             icon={<FaChevronLeft />}
             onClick={handlePrevSlide}
-            className="border-black shadow-md transition-colors duration-300 hover:bg-[#22A6DF] hover:text-white"
+            className="border-black shadow-md transition-colors duration-300 hover:bg-[#FFA500] hover:text-white"
             disabled={data.length === 0}
           />
           <Button
             shape="circle"
             icon={<FaChevronRight />}
             onClick={handleNextSlide}
-            className="border-black shadow-md transition-colors duration-300 hover:bg-[#22A6DF] hover:text-white"
+            className="border-black shadow-md transition-colors duration-300 hover:bg-[#FFA500] hover:text-white"
             disabled={data.length === 0}
           />
         </div>
@@ -155,7 +155,7 @@ export default function HotProduct({ data }: { data: Product[] }) {
                 <div className="flex w-3/4 flex-col justify-between p-2">
                   <p className="text-xs font-bold sm:text-sm">{product.name}</p>
                   <div className="mt-2 flex items-center gap-2">
-                    <p className="text-sm font-bold text-[#22A6DF] transition-colors duration-300 sm:text-base">
+                    <p className="text-sm font-bold text-[#FFA500] transition-colors duration-300 sm:text-base">
                       {new Intl.NumberFormat("vi-VN", {
                         style: "currency",
                         currency: "VND",
@@ -178,7 +178,7 @@ export default function HotProduct({ data }: { data: Product[] }) {
                     )}
                   </div>
                   <Button
-                    className="mt-2 w-[90px] bg-[#22A6DF] hover:bg-[#1890ff] hover:border-[#22A6DF] rounded-lg text-white text-xs sm:w-[120px] sm:text-sm"
+                    className="mt-2 w-[90px] bg-[#FFA500] hover:bg-[#1890ff] hover:border-[#FFA500] rounded-lg text-white text-xs sm:w-[120px] sm:text-sm"
                     onClick={() => handleBuyNow(product)}
                   >
                     Mua ngay

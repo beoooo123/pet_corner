@@ -389,7 +389,7 @@ export default function DetailProduct() {
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-3">
               <Button
-                className="w-full sm:w-auto rounded-lg bg-[#22A6DF] px-4 lg:px-6 py-3 lg:py-5 text-white text-sm lg:text-base"
+                className="w-full sm:w-auto rounded-lg bg-[#FFA500] px-4 lg:px-6 py-3 lg:py-5 text-white text-sm lg:text-base"
                 onClick={handleAddToCart}
               >
                 Thêm vào giỏ hàng
@@ -434,7 +434,7 @@ export default function DetailProduct() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
             {/* Average Rating Card */}
             <div className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl shadow-sm">
-              <div className="text-4xl font-bold text-[#22A6DF] mb-2">
+              <div className="text-4xl font-bold text-[#FFA500] mb-2">
                 {comments.length > 0
                   ? (
                       comments.reduce((sum, review) => sum + review.score, 0) /
@@ -478,7 +478,7 @@ export default function DetailProduct() {
                         initial={{ width: 0 }}
                         animate={{ width: `${percentage}%` }}
                         transition={{ duration: 1, ease: "easeOut" }}
-                        className="h-full bg-[#22A6DF] rounded-full"
+                        className="h-full bg-[#FFA500] rounded-full"
                       />
                     </div>
                     <span className="text-sm text-gray-500 w-12">{count}</span>
@@ -685,7 +685,7 @@ export default function DetailProduct() {
                       {/* Name */}
                       <h3
                         onClick={() => handleNavigateToProduct(product._id)} // Điều hướng khi nhấn vào tên sản phẩm
-                        className="line-clamp-2 min-h-[2.5rem] text-sm font-medium text-gray-800 transition-colors duration-300 group-hover:text-[#22A6DF] cursor-pointer"
+                        className="line-clamp-2 min-h-[2.5rem] text-sm font-medium text-gray-800 transition-colors duration-300 group-hover:text-[#FFA500] cursor-pointer"
                       >
                         {product.name}
                       </h3>
@@ -693,7 +693,7 @@ export default function DetailProduct() {
                       {/* Price */}
                       <div className="flex flex-row items-center justify-center gap-1 sm:flex-row sm:gap-2">
                         <motion.p
-                          className="text-lg font-bold text-[#22A6DF]"
+                          className="text-lg font-bold text-[#FFA500]"
                           whileHover={{ scale: 1.05 }}
                         >
                           {new Intl.NumberFormat("vi-VN", {

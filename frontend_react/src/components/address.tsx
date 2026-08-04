@@ -365,7 +365,7 @@ export default function Address() {
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="flex items-center gap-2 px-4 py-2 bg-[#22A6DF] hover:bg-[#1890ff] hover:border-[#22A6DF] text-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200"
+          className="flex items-center gap-2 px-4 py-2 bg-[#FFA500] hover:bg-[#1890ff] hover:border-[#FFA500] text-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200"
           onClick={() => setIsModalVisible(true)}
         >
           <PlusOutlined />
@@ -415,7 +415,7 @@ export default function Address() {
                     <Tooltip title="Chỉnh sửa">
                       <Button
                         icon={<EditOutlined />}
-                        className="flex items-center justify-center w-9 h-9 text-[#22A6DF] border-[#22A6DF] hover:bg-blue-50"
+                        className="flex items-center justify-center w-9 h-9 text-[#FFA500] border-[#FFA500] hover:bg-blue-50"
                         shape="circle"
                         onClick={() => handleEditAddress(index)}
                       />
@@ -472,7 +472,7 @@ export default function Address() {
         okText="Lưu"
         cancelText="Hủy"
         okButtonProps={{
-          className: "bg-[#22A6DF] hover:bg-[#1890ff] text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+          className: "bg-[#FFA500] hover:bg-[#1890ff] text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
         }}
         cancelButtonProps={{
           className: "bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg transition duration-200"
@@ -492,7 +492,7 @@ export default function Address() {
           >
             <Input
               placeholder="Nhập họ và tên"
-              className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#22A6DF] focus:border-transparent"
+              className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
             />
           </Item>
           <Item
@@ -505,7 +505,7 @@ export default function Address() {
           >
             <Input
               placeholder="Nhập số điện thoại"
-              className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#22A6DF] focus:border-transparent"
+              className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
             />
           </Item>
           <div className="grid grid-cols-2 gap-4">
@@ -579,7 +579,7 @@ export default function Address() {
             >
               <Input
                 placeholder="Nhập địa chỉ nhà"
-                className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#22A6DF] focus:border-transparent"
+                className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
               />
             </Item>
           </div>
@@ -598,7 +598,7 @@ export default function Address() {
         okText="Lưu"
         cancelText="Hủy"
         okButtonProps={{
-          className: "bg-[#22A6DF] hover:bg-[#1890ff] text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+          className: "bg-[#FFA500] hover:bg-[#1890ff] text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
         }}
         cancelButtonProps={{
           className: "bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg transition duration-200"
@@ -618,7 +618,7 @@ export default function Address() {
           >
             <Input
               placeholder="Nhập họ và tên"
-              className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#22A6DF] focus:border-transparent"
+              className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
             />
           </Item>
           <Item
@@ -631,7 +631,7 @@ export default function Address() {
           >
             <Input
               placeholder="Nhập số điện thoại"
-              className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#22A6DF] focus:border-transparent"
+              className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
             />
           </Item>
           <div className="grid grid-cols-2 gap-4">
@@ -703,7 +703,7 @@ export default function Address() {
             >
               <Input
                 placeholder="Nhập địa chỉ nhà"
-                className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#22A6DF] focus:border-transparent"
+                className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
               />
             </Item>
           </div>

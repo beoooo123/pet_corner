@@ -730,12 +730,12 @@ const Payment = () => {
             >
               <div className="flex items-center gap-3">
                 <div className="rounded-full p-2 bg-blue-100">
-                  <User size={20} className="text-[#22a6df]" />
+                  <User size={20} className="text-[#FFA500]" />
                 </div>
                 <span className="text-sm sm:text-base">
                   Bạn đã có tài khoản?{" "}
                   <span
-                    className="ml-1 cursor-pointer font-semibold text-[#22a6df] hover:text-blue-600 transition-colors duration-200"
+                    className="ml-1 cursor-pointer font-semibold text-[#FFA500] hover:text-blue-600 transition-colors duration-200"
                     onClick={() => navigate("/login")}
                   >
                     Đăng nhập
@@ -758,7 +758,7 @@ const Payment = () => {
               >
                 {/* Header */}
                 <div className="flex justify-between items-center mb-8">
-                  <h3 className="text-2xl font-bold text-[#22a6df]">
+                  <h3 className="text-2xl font-bold text-[#FFA500]">
                     Chọn địa chỉ giao hàng
                   </h3>
                   <button
@@ -767,13 +767,13 @@ const Payment = () => {
                   >
                     <X
                       size={24}
-                      className="text-gray-400 group-hover:text-[#22a6df] transition-colors"
+                      className="text-gray-400 group-hover:text-[#FFA500] transition-colors"
                     />
                   </button>
                 </div>
 
                 {/* Address List */}
-                <div className="max-h-[500px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[#22a6df] scrollbar-track-gray-100">
+                <div className="max-h-[500px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[#FFA500] scrollbar-track-gray-100">
                   {addresses.length > 0 ? (
                     addresses.map((address: Address, index) => (
                       <motion.div
@@ -781,7 +781,7 @@ const Payment = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="p-5 mb-4 border border-gray-100 hover:border-[#22a6df]/30 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#22a6df]/10 bg-white"
+                        className="p-5 mb-4 border border-gray-100 hover:border-[#FFA500]/30 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FFA500]/10 bg-white"
                       >
                         <div className="flex items-start gap-4">
                           <div className="relative">
@@ -792,7 +792,7 @@ const Payment = () => {
                               onChange={() =>
                                 setCheckedAddressId(address._id || null)
                               }
-                              className="h-5 w-5 cursor-pointer accent-[#22a6df] focus:ring-[#22a6df]"
+                              className="h-5 w-5 cursor-pointer accent-[#FFA500] focus:ring-[#FFA500]"
                             />
                           </div>
                           <div className="flex-1">
@@ -805,7 +805,7 @@ const Payment = () => {
                                   | {address.phone}
                                 </p>
                                 {address.isDefault && (
-                                  <span className="inline-block px-3 py-1 text-xs font-semibold text-[#22a6df] bg-[#22a6df]/10 rounded-full">
+                                  <span className="inline-block px-3 py-1 text-xs font-semibold text-[#FFA500] bg-[#FFA500]/10 rounded-full">
                                     Mặc định
                                   </span>
                                 )}
@@ -831,7 +831,7 @@ const Payment = () => {
                                     )?.code,
                                   });
                                 }}
-                                className="px-4 py-1.5 text-[#22a6df] font-medium hover:bg-[#22a6df]/10 rounded-full transition-colors text-sm"
+                                className="px-4 py-1.5 text-[#FFA500] font-medium hover:bg-[#FFA500]/10 rounded-full transition-colors text-sm"
                               >
                                 Sửa
                               </motion.button>
@@ -861,7 +861,7 @@ const Payment = () => {
                       setIsModalOpen(false);
                       setIsModalVisible(true);
                     }}
-                    className="rounded-xl bg-white px-6 py-2.5 font-medium text-[#22a6df] text-sm border-2 border-[#22a6df] hover:bg-[#22a6df]/5 transition-colors"
+                    className="rounded-xl bg-white px-6 py-2.5 font-medium text-[#FFA500] text-sm border-2 border-[#FFA500] hover:bg-[#FFA500]/5 transition-colors"
                   >
                     Thêm địa chỉ
                   </motion.button>
@@ -869,7 +869,7 @@ const Payment = () => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={handleConfirmAddress}
-                    className="rounded-xl bg-[#22a6df] px-6 py-2.5 font-medium text-white text-sm hover:bg-[#1e95c8] transition-colors shadow-lg shadow-[#22a6df]/30"
+                    className="rounded-xl bg-[#FFA500] px-6 py-2.5 font-medium text-white text-sm hover:bg-[#1e95c8] transition-colors shadow-lg shadow-[#FFA500]/30"
                   >
                     Xác nhận
                   </motion.button>
@@ -888,8 +888,8 @@ const Payment = () => {
               {/* Shipping Information */}
               <div className="rounded-2xl p-6 sm:p-8 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.05)] backdrop-blur-sm border border-gray-100">
                 <h2 className="mb-6 sm:mb-8 text-xl sm:text-2xl font-semibold flex items-center gap-3 text-gray-800">
-                  <div className="p-2 rounded-xl bg-[#22a6df]/10">
-                    <MapPin className="text-[#22a6df]" size={24} />
+                  <div className="p-2 rounded-xl bg-[#FFA500]/10">
+                    <MapPin className="text-[#FFA500]" size={24} />
                   </div>
                   Thông tin giao hàng
                 </h2>
@@ -906,7 +906,7 @@ const Payment = () => {
                             | {selectedAddress.phone}
                           </p>
                           {selectedAddress.isDefault && (
-                            <span className="inline-block px-3 py-1 text-xs font-medium text-[#22a6df] bg-[#22a6df]/10 rounded-full">
+                            <span className="inline-block px-3 py-1 text-xs font-medium text-[#FFA500] bg-[#FFA500]/10 rounded-full">
                               Mặc định
                             </span>
                           )}
@@ -919,7 +919,7 @@ const Payment = () => {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         onClick={() => setIsModalOpen(true)}
-                        className="text-[#22a6df] font-medium hover:text-[#1a85b3] transition-colors flex items-center gap-2"
+                        className="text-[#FFA500] font-medium hover:text-[#1a85b3] transition-colors flex items-center gap-2"
                       >
                         <Edit3 size={16} />
                         Thay đổi
@@ -939,7 +939,7 @@ const Payment = () => {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         onClick={() => setIsModalVisible(true)}
-                        className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#22a6df] text-white rounded-xl hover:bg-[#1a85b3] transition-colors font-medium shadow-lg shadow-[#22a6df]/20"
+                        className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#FFA500] text-white rounded-xl hover:bg-[#1a85b3] transition-colors font-medium shadow-lg shadow-[#FFA500]/20"
                       >
                         <Plus size={18} />
                         Thêm địa chỉ
@@ -952,8 +952,8 @@ const Payment = () => {
               {/* Shipping Method */}
               <div className="rounded-2xl p-6 sm:p-8 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.05)] backdrop-blur-sm border border-gray-100">
                 <h2 className="mb-6 sm:mb-8 text-xl sm:text-2xl font-semibold flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-[#22a6df]/10">
-                    <Truck className="text-[#22a6df]" size={24} />
+                  <div className="p-2 rounded-xl bg-[#FFA500]/10">
+                    <Truck className="text-[#FFA500]" size={24} />
                   </div>
                   Phương thức vận chuyển
                 </h2>
@@ -971,7 +971,7 @@ const Payment = () => {
                             !isDisabled && setSelectedShippingMethod(method)
                           }
                           className={`flex flex-col sm:flex-row sm:justify-between items-start sm:items-center rounded-xl p-4 sm:p-5 transition-all duration-200 ${selectedShippingMethod?._id === method._id
-                              ? "border-2 border-[#22a6df] bg-[#22a6df]/5"
+                              ? "border-2 border-[#FFA500] bg-[#FFA500]/5"
                               : isDisabled
                                 ? "bg-gray-100 opacity-60 cursor-not-allowed"
                                 : "bg-gray-50 hover:bg-gray-100 border border-gray-200"
@@ -979,7 +979,7 @@ const Payment = () => {
                         >
                           <div className="flex items-center mb-3 sm:mb-0">
                             <div className="mr-4 rounded-full p-2.5 bg-white shadow-sm">
-                              <Truck size={20} className="text-[#22a6df]" />
+                              <Truck size={20} className="text-[#FFA500]" />
                             </div>
                             <div>
                               <div className="font-medium text-gray-800">
@@ -991,14 +991,14 @@ const Payment = () => {
                             </div>
                           </div>
                           <div className="flex items-center gap-3 ml-10 sm:ml-0">
-                            <span className="font-semibold text-[#22a6df]">
+                            <span className="font-semibold text-[#FFA500]">
                               {formatPrice(method.delivery_fee)}
                             </span>
                             {selectedShippingMethod?._id === method._id && (
                               <motion.div
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
-                                className="w-6 h-6 rounded-full bg-[#22a6df] flex items-center justify-center"
+                                className="w-6 h-6 rounded-full bg-[#FFA500] flex items-center justify-center"
                               >
                                 <Check size={14} className="text-white" />
                               </motion.div>
@@ -1021,8 +1021,8 @@ const Payment = () => {
               {/* Payment Method */}
               <div className="rounded-2xl p-6 sm:p-8 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.05)] backdrop-blur-sm border border-gray-100">
                 <h2 className="mb-6 sm:mb-8 text-xl sm:text-2xl font-semibold flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-[#22a6df]/10">
-                    <CreditCard className="text-[#22a6df]" size={24} />
+                  <div className="p-2 rounded-xl bg-[#FFA500]/10">
+                    <CreditCard className="text-[#FFA500]" size={24} />
                   </div>
                   Phương thức thanh toán
                 </h2>
@@ -1035,7 +1035,7 @@ const Payment = () => {
                         key={method._id}
                         onClick={() => setSelectedPayment(method._id)}
                         className={`flex flex-row sm:flex-row items-center sm:items-center sm:justify-between cursor-pointer rounded-xl p-4 sm:p-5 transition-all duration-200 ${selectedPayment === method._id
-                            ? "border-2 border-[#22a6df] bg-[#22a6df]/5"
+                            ? "border-2 border-[#FFA500] bg-[#FFA500]/5"
                             : "bg-gray-50 hover:bg-gray-100 border border-gray-200"
                           }`}
                       >
@@ -1058,7 +1058,7 @@ const Payment = () => {
                           <motion.div
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
-                            className="w-6 h-6 rounded-full bg-[#22a6df] flex items-center justify-center ml-10 sm:ml-0"
+                            className="w-6 h-6 rounded-full bg-[#FFA500] flex items-center justify-center ml-10 sm:ml-0"
                           >
                             <Check size={14} className="text-white" />
                           </motion.div>
@@ -1085,8 +1085,8 @@ const Payment = () => {
             >
               <div className="sticky top-8 rounded-2xl p-6 sm:p-8 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.05)] backdrop-blur-sm border border-gray-100">
                 <h2 className="mb-6 text-xl sm:text-2xl font-semibold flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-[#22a6df]/10">
-                    <ShoppingBag className="text-[#22a6df]" size={24} />
+                  <div className="p-2 rounded-xl bg-[#FFA500]/10">
+                    <ShoppingBag className="text-[#FFA500]" size={24} />
                   </div>
                   Đơn hàng của bạn
                 </h2>
@@ -1163,7 +1163,7 @@ const Payment = () => {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={applyCoupon}
-                      className="rounded-xl bg-[#22a6df] px-4 py-2 text-sm sm:text-base font-medium text-white"
+                      className="rounded-xl bg-[#FFA500] px-4 py-2 text-sm sm:text-base font-medium text-white"
                     >
                       Áp dụng
                     </motion.button>
@@ -1212,7 +1212,7 @@ const Payment = () => {
                 {/* Total */}
                 <div className="flex justify-between text-base sm:text-lg">
                   <span className="font-semibold">Tổng cộng</span>
-                  <span className="font-bold text-[#22a6df]">
+                  <span className="font-bold text-[#FFA500]">
                     {formatPrice(calculateTotal)}
                   </span>
                 </div>
@@ -1222,7 +1222,7 @@ const Payment = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleCheckout}
-                  className="mt-6 w-full rounded-xl bg-[#22a6df] py-3 text-sm sm:text-base font-medium text-white transition-colors hover:bg-[#1280b7]"
+                  className="mt-6 w-full rounded-xl bg-[#FFA500] py-3 text-sm sm:text-base font-medium text-white transition-colors hover:bg-[#1280b7]"
                 >
                   Hoàn tất đơn hàng
                 </motion.button>
@@ -1248,7 +1248,7 @@ const Payment = () => {
         cancelText="Hủy"
         okButtonProps={{
           className:
-            "bg-[#22A6DF] hover:bg-[#1890ff] text-white font-semibold py-2 px-4 rounded-lg transition duration-200",
+            "bg-[#FFA500] hover:bg-[#1890ff] text-white font-semibold py-2 px-4 rounded-lg transition duration-200",
         }}
         cancelButtonProps={{
           className:
@@ -1269,7 +1269,7 @@ const Payment = () => {
           >
             <Input
               placeholder="Nhập họ và tên"
-              className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#22A6DF] focus:border-transparent"
+              className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
             />
           </Item>
           <Item
@@ -1286,7 +1286,7 @@ const Payment = () => {
           >
             <Input
               placeholder="Nhập số điện thoại"
-              className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#22A6DF] focus:border-transparent"
+              className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
             />
           </Item>
           <div className="grid grid-cols-2 gap-4">
@@ -1380,7 +1380,7 @@ const Payment = () => {
             >
               <Input
                 placeholder="Nhập địa chỉ nhà"
-                className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#22A6DF] focus:border-transparent"
+                className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
               />
             </Item>
           </div>
@@ -1404,7 +1404,7 @@ const Payment = () => {
         cancelText="Hủy"
         okButtonProps={{
           className:
-            "bg-[#22A6DF] hover:bg-[#1890ff] text-white font-semibold py-2 px-4 rounded-lg transition duration-200",
+            "bg-[#FFA500] hover:bg-[#1890ff] text-white font-semibold py-2 px-4 rounded-lg transition duration-200",
         }}
         cancelButtonProps={{
           className:
@@ -1425,7 +1425,7 @@ const Payment = () => {
           >
             <Input
               placeholder="Nhập họ và tên"
-              className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#22A6DF] focus:border-transparent"
+              className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
             />
           </Item>
           <Item
@@ -1442,7 +1442,7 @@ const Payment = () => {
           >
             <Input
               placeholder="Nhập số điện thoại"
-              className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#22A6DF] focus:border-transparent"
+              className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
             />
           </Item>
           <div className="grid grid-cols-2 gap-4">
@@ -1534,7 +1534,7 @@ const Payment = () => {
             >
               <Input
                 placeholder="Nhập địa chỉ nhà"
-                className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#22A6DF] focus:border-transparent"
+                className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
               />
             </Item>
           </div>

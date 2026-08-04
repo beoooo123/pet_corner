@@ -69,7 +69,7 @@ const SuccessPage = () => {
         <p>Bạn không thể truy cập trang này trực tiếp.</p>
         <Button
           type="primary"
-          className="m-2 px-8 py-6 bg-[#22A6DF] hover:bg-[#1890ff] hover:border-[#22A6DF] rounded-lg text-white text-xs sm:text-sm"
+          className="m-2 px-8 py-6 bg-[#FFA500] hover:bg-[#1890ff] hover:border-[#FFA500] rounded-lg text-white text-xs sm:text-sm"
           onClick={handleContinueShopping}
         >
           Tiếp tục mua hàng

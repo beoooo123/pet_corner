@@ -107,7 +107,7 @@ export default function CateProduct({ data }: { data: APIProduct[] }) {
 
                 {/* Name */}
                 <Link to={`/detail/${product._id}`}>
-                  <h3 className="line-clamp-2 min-h-[2.5rem] text-sm font-medium text-gray-800 transition-colors duration-300 group-hover:text-[#22A6DF]">
+                  <h3 className="line-clamp-2 min-h-[2.5rem] text-sm font-medium text-gray-800 transition-colors duration-300 group-hover:text-[#FFA500]">
                     {product.name}
                   </h3>
                 </Link>
@@ -115,7 +115,7 @@ export default function CateProduct({ data }: { data: APIProduct[] }) {
                 {/* Price */}
                 <div className="flex flex-row items-center justify-center gap-1 sm:flex-row sm:gap-2">
                   <motion.p 
-                    className="text-lg font-bold text-[#22A6DF]"
+                    className="text-lg font-bold text-[#FFA500]"
                     whileHover={{ scale: 1.05 }}
                   >
                     {new Intl.NumberFormat("vi-VN", {
@@ -140,7 +140,7 @@ export default function CateProduct({ data }: { data: APIProduct[] }) {
                   whileHover={{ scale: 1.02 }}
                 >
                     <Button 
-                      className="w-full bg-transparent hover:bg-[#22A6DF] border-[#22A6DF] text-[#22A6DF] hover:text-white transition-all duration-300 uppercase font-medium"
+                      className="w-full bg-transparent hover:bg-[#FFA500] border-[#FFA500] text-[#FFA500] hover:text-white transition-all duration-300 uppercase font-medium"
                       onClick={() => handleBuyNow(product)}
                     >
                       <div className="flex items-center justify-center gap-2">
