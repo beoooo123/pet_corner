@@ -55,7 +55,7 @@ const Introduction = () => {
 
   const teamMembers = [
     { name: "Trường" },
-    { name: "Kiên" },
+    { name: "Lê Trung Kiên" },
     { name: "Minh Trí" },
   ];
 
