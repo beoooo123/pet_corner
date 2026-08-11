@@ -210,7 +210,7 @@ export default function Footer() {
             {/* Cửa hàng */}
             <div className="text-center lg:text-left">
               <Title level={5} className="mb-2 text-sm font-bold sm:text-base">
-                Cửa hàng
+                Cửa Hàng
               </Title>
               <Space
                 direction="vertical"
