@@ -129,7 +129,7 @@ export default function SaleProduct({ data }: { data: Product[] }) {
             />
           </div>
           <h2 className="relative z-20 text-center text-base font-semibold sm:text-lg">
-            SẢN PHẨM GIẢM GIÁ
+            sản phẩm giảm GIá
           </h2>
         </div>
 
