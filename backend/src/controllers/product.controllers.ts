@@ -343,7 +343,7 @@ export const getSaleProduct = async (req: Request, res: Response): Promise<void>
 
     res.status(200).json({
       success: true,
-      message: result.length > 0 ? 'Lấy sản phẩm giảm giá thành công' : 'Chưa có sản phẩm giảm giá',
+      message: result.length > 0 ? 'Lấy Sản Phẩm Giảm Giá Thành Công' : 'Chưa có sản phẩm giảm giá',
       result
     });
   } catch (error) {

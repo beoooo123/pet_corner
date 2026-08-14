@@ -139,7 +139,7 @@ const Cart: React.FC = () => {
       <div className="mx-auto max-w-6xl py-8">
         <div className="mb-6 flex flex-col justify-between sm:flex-row sm:items-center">
           <Title level={3} className="!mb-0 text-gray-800">
-            Giỏ hàng của bạn
+            Giỏ Hàng Của Bạn
           </Title>
           <Text className="text-[#686868]">{`(${cartItems.length} sản phẩm)`}</Text>
         </div>
