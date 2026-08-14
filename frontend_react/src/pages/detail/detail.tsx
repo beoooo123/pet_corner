@@ -392,7 +392,7 @@ export default function DetailProduct() {
                 className="w-full sm:w-auto rounded-lg bg-[#FFA500] px-4 lg:px-6 py-3 lg:py-5 text-white text-sm lg:text-base"
                 onClick={handleAddToCart}
               >
-                Thêm vào giỏ hàng
+                Thêm vào Giỏ Hàng
               </Button>
               <Button
                 className="w-full sm:w-auto rounded-lg bg-[#FF0000] px-4 lg:px-6 py-3 lg:py-5 text-white text-sm lg:text-base"
