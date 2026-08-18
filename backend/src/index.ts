@@ -42,10 +42,7 @@ app.get('/', (req, res) => {
 });
 
 // Routes
-app.use('/api/v1/auth', authRouter);
-app.use('/api/v1', categoryRouter);
-app.use('/api/v1', productRouter);
-app.use('/api/v1', userRouter);
+
 app.use('/api/v1', brandRouter);
 app.use('/api/v1', tagRouter);
 app.use('/api/v1', bannerRouter);

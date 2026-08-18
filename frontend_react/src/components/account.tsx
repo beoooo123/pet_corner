@@ -101,58 +101,7 @@ export default function Account() {
 
         const formData = new FormData();
         formData.append("fullname", values.fullname || "");
-<Form form={form} layout="vertical" className="space-y-4" onFinish={onFinish}>
-                        <Item 
-                            name="fullname" 
-                            label={<span className="text-base font-semibold">Họ và tên</span>}
-                            rules={[
-                                { required: true, message: 'Vui lòng nhập họ và tên!' }
-                            ]}
-                        >
-                            <Input className="rounded border border-gray-300 p-2"/>
-                        </Item>
-                        <Item name="email" label={<span className="text-base font-semibold">Email</span>}>
-                            <Input className="rounded border border-gray-300 p-2" disabled />
-                        </Item>
-                        <Item 
-                            name="phone" 
-                            label={<span className="text-base font-semibold">Số điện thoại</span>}
-                            rules={[
-                                { validator: validatePhoneNumber }
-                            ]}
-                        >
-                            <Input placeholder="Nhập số điện thoại" className="rounded border border-gray-300 p-2"/>
-                        </Item>
-                        <Item name="birthDate" label={<span className="text-base font-semibold">Ngày sinh</span>}>
-                            <DatePicker
-                                placeholder="Chọn ngày sinh"
-                                className="w-full rounded border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-[#FFA500]"
-                                format="DD-MM-YYYY"
-                            />
-                        </Item>
-                            <Item>
-                                <Button htmlType="submit" className="w-1/4 bg-[#FFA500] hover:bg-[#1890ff] rounded text-white mr-2" loading={uploading}>Lưu</Button>
-                                <Button className="w-1/4 bg-gray-300 hover:bg-gray-400 rounded text-gray-700" onClick={handleCancel} disabled={uploading}>Hủy</Button>
-                            </Item>
-                    </Form>
-                </div>
-                <div className="w-full md:w-1/2 flex flex-col justify-center items-center">
-                    <Avatar size={120} src={user?.avatar || "/images/avatar/avatar1.png"} />
-                    <Upload {...uploadProps}>
-                        <Button
-                            icon={<UploadOutlined />}
-                            className="bg-[#FFA500] text-white hover:bg-[#1890ff] rounded my-3"
-                        >
-                            Chọn
-                        </Button>
-                    </Upload>
-                    <p className="text-xs text-gray-500 text-center">Dung lượng file tối đa: 1MB <br /> Định dạng: JPG, PNG</p>
-                </div>
-            </div>
-        </>
-    )
-}
-formData.append("email", values.email || "");
+        formData.append("email", values.email || "");
         formData.append("phone_number", values.phone || "");
         formData.append("dateOfBirth", values.birthDate?.format("YYYY-MM-DD") || "");
 
@@ -231,3 +180,54 @@ formData.append("email", values.email || "");
             <hr className="mt-2 border-gray-300" />
             <div className="flex m-4 flex-col gap-6 md:flex-row md:gap-8">
                 <div className="w-full md:w-1/2">
+                    <Form form={form} layout="vertical" className="space-y-4" onFinish={onFinish}>
+                        <Item 
+                            name="fullname" 
+                            label={<span className="text-base font-semibold">Họ và tên</span>}
+                            rules={[
+                                { required: true, message: 'Vui lòng nhập họ và tên!' }
+                            ]}
+                        >
+                            <Input className="rounded border border-gray-300 p-2"/>
+                        </Item>
+                        <Item name="email" label={<span className="text-base font-semibold">Email</span>}>
+                            <Input className="rounded border border-gray-300 p-2" disabled />
+                        </Item>
+                        <Item 
+                            name="phone" 
+                            label={<span className="text-base font-semibold">Số điện thoại</span>}
+                            rules={[
+                                { validator: validatePhoneNumber }
+                            ]}
+                        >
+                            <Input placeholder="Nhập số điện thoại" className="rounded border border-gray-300 p-2"/>
+                        </Item>
+                        <Item name="birthDate" label={<span className="text-base font-semibold">Ngày sinh</span>}>
+                            <DatePicker
+                                placeholder="Chọn ngày sinh"
+                                className="w-full rounded border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-[#FFA500]"
+                                format="DD-MM-YYYY"
+                            />
+                        </Item>
+                            <Item>
+                                <Button htmlType="submit" className="w-1/4 bg-[#FFA500] hover:bg-[#1890ff] rounded text-white mr-2" loading={uploading}>Lưu</Button>
+                                <Button className="w-1/4 bg-gray-300 hover:bg-gray-400 rounded text-gray-700" onClick={handleCancel} disabled={uploading}>Hủy</Button>
+                            </Item>
+                    </Form>
+                </div>
+                <div className="w-full md:w-1/2 flex flex-col justify-center items-center">
+                    <Avatar size={120} src={user?.avatar || "/images/avatar/avatar1.png"} />
+                    <Upload {...uploadProps}>
+                        <Button
+                            icon={<UploadOutlined />}
+                            className="bg-[#FFA500] text-white hover:bg-[#1890ff] rounded my-3"
+                        >
+                            Chọn
+                        </Button>
+                    </Upload>
+                    <p className="text-xs text-gray-500 text-center">Dung lượng file tối đa: 1MB <br /> Định dạng: JPG, PNG</p>
+                </div>
+            </div>
+        </>
+    )
+}
