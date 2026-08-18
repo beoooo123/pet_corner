@@ -101,64 +101,7 @@ export default function Account() {
 
         const formData = new FormData();
         formData.append("fullname", values.fullname || "");
-        formData.append("email", values.email || "");
-        formData.append("phone_number", values.phone || "");
-        formData.append("dateOfBirth", values.birthDate?.format("YYYY-MM-DD") || "");
-
-        if (fileList.length > 0) {
-            const file = fileList[0].originFileObj;
-            if (!file) {
-                message.error("Vui lòng chọn file để upload!");
-                return;
-            }
-
-            if (file.size > 1024 * 1024) {
-                message.error("Dung lượng file tối đa là 1MB!");
-                return;
-            }
-
-            const allowedTypes = ["image/jpeg", "image/png"];
-            if (!allowedTypes.includes(file.type)) {
-                message.error("Chỉ hỗ trợ định dạng JPG, PNG!");
-                return;
-            }
-
-            formData.append("avatar", file);
-        }
-
-        setUploading(true);
-
-    const validatePhoneNumber = (_: any, value: string) => {
-        const phoneRegex = /^(03|05|07|08|09)[0-9]{8}$/;
-        if (value && !phoneRegex.test(value)) {
-            return Promise.reject(new Error('Số điện thoại không hợp lệ! Phải bắt đầu bằng 03, 05, 07, 08, 09 và đủ 10 số.'));
-        }
-        return Promise.resolve();
-    };
-
-    const uploadProps = {
-        onRemove: () => {
-            setFileList([]);
-        },
-        beforeUpload: (file: any) => {
-            setFileList([file]);
-            return false;
-        },
-        fileList,
-        onChange: (info: any) => {
-            let newFileList = [...info.fileList];
-            newFileList = newFileList.slice(-1);
-            setFileList(newFileList);
-        },
-    };
-
-    return (
-        <>
-            <h3 className="mb-4 text-lg font-bold text-gray-800">Hồ sơ của tôi</h3>
-            <hr className="mt-2 border-gray-300" />
-            <div className="flex m-4 flex-col gap-6 md:flex-row md:gap-8">
-                <div className="w-full md:w-1/2">
-                    <Form form={form} layout="vertical" className="space-y-4" onFinish={onFinish}>
+<Form form={form} layout="vertical" className="space-y-4" onFinish={onFinish}>
                         <Item 
                             name="fullname" 
                             label={<span className="text-base font-semibold">Họ và tên</span>}
@@ -209,3 +152,82 @@ export default function Account() {
         </>
     )
 }
+formData.append("email", values.email || "");
+        formData.append("phone_number", values.phone || "");
+        formData.append("dateOfBirth", values.birthDate?.format("YYYY-MM-DD") || "");
+
+        if (fileList.length > 0) {
+            const file = fileList[0].originFileObj;
+            if (!file) {
+                message.error("Vui lòng chọn file để upload!");
+                return;
+            }
+
+            if (file.size > 1024 * 1024) {
+                message.error("Dung lượng file tối đa là 1MB!");
+                return;
+            }
+
+            const allowedTypes = ["image/jpeg", "image/png"];
+            if (!allowedTypes.includes(file.type)) {
+                message.error("Chỉ hỗ trợ định dạng JPG, PNG!");
+                return;
+            }
+
+            formData.append("avatar", file);
+        }
+
+        setUploading(true);
+
+        try {
+            const userUpdateResponse = await userApi.update(accountID, formData);
+            const data = userUpdateResponse.data;
+            const updatedUser = {
+                ...user,
+                ...data.data,
+                fullname: values.fullname || data.data?.fullname || user?.fullname,
+                email: values.email || data.data?.email || user?.email,
+                phone_number: values.phone || data.data?.phone_number || user?.phone_number,
+                dateOfBirth: values.birthDate?.format("YYYY-MM-DD") || data.data?.dateOfBirth || user?.dateOfBirth,
+            };
+
+            setUser(updatedUser);
+            localStorage.setItem("userData", JSON.stringify(updatedUser));
+            message.success("Cập nhật thành công!");
+            setFileList([]);
+            window.location.reload();
+        } catch (error) {
+            message.error(`Cập nhật thất bại: ${error.message}`);
+        }
+    };
+
+    const validatePhoneNumber = (_: any, value: string) => {
+        const phoneRegex = /^(03|05|07|08|09)[0-9]{8}$/;
+        if (value && !phoneRegex.test(value)) {
+            return Promise.reject(new Error('Số điện thoại không hợp lệ! Phải bắt đầu bằng 03, 05, 07, 08, 09 và đủ 10 số.'));
+        }
+        return Promise.resolve();
+    };
+
+    const uploadProps = {
+        onRemove: () => {
+            setFileList([]);
+        },
+        beforeUpload: (file: any) => {
+            setFileList([file]);
+            return false;
+        },
+        fileList,
+        onChange: (info: any) => {
+            let newFileList = [...info.fileList];
+            newFileList = newFileList.slice(-1);
+            setFileList(newFileList);
+        },
+    };
+
+    return (
+        <>
+            <h3 className="mb-4 text-lg font-bold text-gray-800">Hồ sơ của tôi</h3>
+            <hr className="mt-2 border-gray-300" />
+            <div className="flex m-4 flex-col gap-6 md:flex-row md:gap-8">
+                <div className="w-full md:w-1/2">
