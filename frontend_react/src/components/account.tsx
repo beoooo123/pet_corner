@@ -128,28 +128,6 @@ export default function Account() {
 
         setUploading(true);
 
-        try {
-            const userUpdateResponse = await userApi.update(accountID, formData);
-            const data = userUpdateResponse.data;
-            const updatedUser = {
-                ...user,
-                ...data.data,
-                fullname: values.fullname || data.data?.fullname || user?.fullname,
-                email: values.email || data.data?.email || user?.email,
-                phone_number: values.phone || data.data?.phone_number || user?.phone_number,
-                dateOfBirth: values.birthDate?.format("YYYY-MM-DD") || data.data?.dateOfBirth || user?.dateOfBirth,
-            };
-
-            setUser(updatedUser);
-            localStorage.setItem("userData", JSON.stringify(updatedUser));
-            message.success("Cập nhật thành công!");
-            setFileList([]);
-            window.location.reload();
-        } catch (error) {
-            message.error(`Cập nhật thất bại: ${error.message}`);
-        }
-    };
-
     const validatePhoneNumber = (_: any, value: string) => {
         const phoneRegex = /^(03|05|07|08|09)[0-9]{8}$/;
         if (value && !phoneRegex.test(value)) {
