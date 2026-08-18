@@ -3,18 +3,34 @@ import { Typography, Button, Space } from "antd";
 
 const { Title, Text } = Typography;
 
-const CancelPage = () => {
+const SuccessPage = () => {
+  const handleContact = () => {
+    alert("Đang chuyển đến trang hỗ trợ...");
+  };
+
   return (
-    <div style={{ textAlign: "center", padding: "50px" }}>
+    <div
+      style={{
+        textAlign: "center",
+        padding: "80px 20px",
+        minHeight: "400px",
+      }}
+    >
       <Space direction="vertical" size="large">
-        <Title className="text-red-400" level={3}>
-          Huỷ đơn hàng thành công
+        <Title level={2} style={{ color: "#52c41a" }}>
+          Đặt hàng thành công!
         </Title>
-        <Text>
-          Huỷ đơn hàng thì sao? Hãy liên hệ với chúng tôi để được hỗ trợ tốt
-          nhất.
+
+        <Text style={{ fontSize: "16px" }}>
+          Cảm ơn bạn đã mua hàng. Đơn hàng của bạn đã được tiếp nhận
+          và đang được xử lý.
         </Text>
-        <Button type="primary" size="large">
+
+        <Button
+          type="primary"
+          size="large"
+          onClick={handleContact}
+        >
           Liên hệ hỗ trợ
         </Button>
       </Space>
@@ -22,4 +38,4 @@ const CancelPage = () => {
   );
 };
 
-export default CancelPage;
+export default SuccessPage;
