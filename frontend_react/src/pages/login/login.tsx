@@ -472,7 +472,7 @@ export default function Login() {
 
           <div className="px-3 pt-2 text-center sm:px-4 sm:pt-4">
             <Text type="secondary" className="text-[10px] sm:text-xs">
-              Pet Heaven cam kết bảo mật và sẽ không tiết lộ thông tin khách
+              Pet Corner cam kết bảo mật và sẽ không tiết lộ thông tin khách
               hàng khi không có sự cho phép.
             </Text>
           </div>

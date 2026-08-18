@@ -397,7 +397,7 @@ export default function SignUp() {
 
             <div className="px-3 pt-3 text-center sm:px-5 sm:pt-5">
               <Text type="secondary" className="text-[10px] sm:text-xs">
-                Pet Heaven cam kết bảo mật thông tin khách hàng.
+                Pet Corner cam kết bảo mật thông tin khách hàng.
               </Text>
             </div>
           </div>

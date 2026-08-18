@@ -530,7 +530,7 @@ export const changeBookingStatus = async (req: Request, res: Response): Promise<
 			</tr>
 		</table>
 		<p style="color: #555; text-align: center;">Cảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi!</p>
-		<p style="color: #555; text-align: center;">Trân trọng,<br><strong>Pet Heaven</strong></p>
+		<p style="color: #555; text-align: center;">Trân trọng,<br><strong>Pet Corner</strong></p>
 	</div>
               `
             });

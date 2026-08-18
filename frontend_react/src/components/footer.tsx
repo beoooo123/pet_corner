@@ -231,10 +231,10 @@ export default function Footer() {
               </Space>
             </div>
 
-            {/* Pet Heaven Shop */}
+            {/* Pet Corner Shop */}
             <div className="text-center lg:text-left">
               <Title level={5} className="mb-2 text-sm font-bold sm:text-base">
-                Pet Heaven shop
+                Pet Corner shop
               </Title>
               <Space
                 direction="vertical"
@@ -306,7 +306,7 @@ export default function Footer() {
         </div>
       </footer>
       <Text className="mt-2 block text-center text-xs text-gray-500 sm:text-sm">
-        Copyright © 2025 Pet Heaven. All rights reserved.
+        Copyright © 2025 Pet Corner. All rights reserved.
       </Text>
     </>
   );

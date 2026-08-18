@@ -63,7 +63,7 @@ const Introduction = () => {
   const testimonials = [
     {
       name: "Nguyễn Thị Thu Huyền",
-      feedback: "Dịch vụ tại Pet Heaven thật tuyệt vời! Chó của tôi được chăm sóc rất kỹ lưỡng, nhân viên thân thiện và chuyên nghiệp.",
+      feedback: "Dịch vụ tại Pet Corner thật tuyệt vời! Chó của tôi được chăm sóc rất kỹ lưỡng, nhân viên thân thiện và chuyên nghiệp.",
       image: "https://picsum.photos/id/1010/200/200", // Replace with customer photo
     },
     {
@@ -73,7 +73,7 @@ const Introduction = () => {
     },
     {
       name: "Hoàng Thùy Linh",
-      feedback: "Thức ăn và đồ dùng tại đây chất lượng cao, giá cả hợp lý. Cảm ơn Pet Heaven đã giúp thú cưng của tôi hạnh phúc!",
+      feedback: "Thức ăn và đồ dùng tại đây chất lượng cao, giá cả hợp lý. Cảm ơn Pet Corner đã giúp thú cưng của tôi hạnh phúc!",
       image: "https://picsum.photos/id/1012/200/200", // Replace with customer photo
     },
   ];
@@ -116,7 +116,7 @@ const Introduction = () => {
                 transition={{ duration: 0.5 }}
               >
                 <Title level={2} className={`${darkMode ? 'text-blue-300' : 'text-blue-500'} mb-4`}>
-                  Pet Heaven - Yêu thương trọn vẹn, chăm sóc tận tâm
+                  Pet Corner - Yêu thương trọn vẹn, chăm sóc tận tâm
                 </Title>
                 <Title level={4} className={`font-normal mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                   Chăm sóc thú cưng một cách gần gũi và thân thiện.
@@ -215,7 +215,7 @@ const Introduction = () => {
             </div>
           </div>
 
-          {/* Phần Tại sao chọn Pet Heaven? */}
+          {/* Phần Tại sao chọn Pet Corner? */}
           <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-6 md:p-10 mb-12 rounded-lg shadow-md`}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -223,7 +223,7 @@ const Introduction = () => {
               transition={{ duration: 0.5 }}
             >
               <Title level={2} className={`${darkMode ? 'text-blue-300' : 'text-blue-500'} text-center mb-6`}>
-                Tại sao chọn Pet Heaven?
+                Tại sao chọn Pet Corner?
               </Title>
               <div className="flex flex-col md:flex-row items-center gap-6">
                 <div className="w-full md:w-2/3">
@@ -234,7 +234,7 @@ const Introduction = () => {
                         Tầm nhìn
                       </Title>
                       <Paragraph className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} text-base md:text-lg leading-relaxed`}>
-                        PET HEAVEN luôn nỗ lực không ngừng để xây dựng và phát triển thương
+                        Pet Corner luôn nỗ lực không ngừng để xây dựng và phát triển thương
                         hiệu petshop trong lòng quý khách hàng. Chúng tôi nhận thức rõ sứ
                         mệnh mang lại sức khỏe và sự đáng yêu cho các bé thú cưng (chó, mèo).
                         Định hướng phát triển chuỗi cửa hàng và nghiên cứu để cho ra đời các
@@ -262,7 +262,7 @@ const Introduction = () => {
                         Nhân sự
                       </Title>
                       <Paragraph className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} text-base md:text-lg leading-relaxed`}>
-                        Đội ngũ nhân viên của Pet Heaven là những người chuyên nghiệp, tâm
+                        Đội ngũ nhân viên của Pet Corner là những người chuyên nghiệp, tâm
                         huyết và là niềm tự hào của chúng tôi. Nhân viên được tuyển dụng và
                         đào tạo bài bản hằng tháng, đồng thời chúng tôi luôn chú trọng nâng
                         cao đời sống tinh thần để họ có tinh thần làm việc tích cực, mang lại
@@ -276,7 +276,7 @@ const Introduction = () => {
                         Đối tác
                       </Title>
                       <Paragraph className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} text-base md:text-lg leading-relaxed`}>
-                        PET HEAVEN hiện là đại lý phân phối chính hãng của hơn 20 đối tác cung
+                        Pet Corner hiện là đại lý phân phối chính hãng của hơn 20 đối tác cung
                         cấp thức ăn, thuốc thú y, vật dụng và thời trang cho chó mèo. Các đối
                         tác đến từ Pháp, Đức, Nhật, Hàn Quốc, Singapore, Thái Lan... Nhờ sự
                         hợp tác với các tập đoàn đa quốc gia, chúng tôi tự tin mang đến các
@@ -288,17 +288,17 @@ const Introduction = () => {
                 <div className="w-full md:w-1/3 space-y-4">
                   <img
                     src="https://res.cloudinary.com/dboomrlp9/image/upload/v1744967492/backgroundAI.jpg"
-                    alt="Nhân viên Pet Heaven"
+                    alt="Nhân viên Pet Corner"
                     className="w-full h-64 object-cover rounded-lg shadow-md"
                   />
                   <img
                     src="https://res.cloudinary.com/dboomrlp9/image/upload/v1744967663/assistantLogo.jpg"
-                    alt="Nhân viên Pet Heaven"
+                    alt="Nhân viên Pet Corner"
                     className="w-full h-64 object-cover rounded-lg shadow-md"
                   />
                   <img
                     src="https://res.cloudinary.com/dboomrlp9/image/upload/v1744967491/assitantLogo.jpg"
-                    alt="Nhân viên Pet Heaven"
+                    alt="Nhân viên Pet Corner"
                     className="w-full h-64 object-cover rounded-lg shadow-md"
                   />
                 </div>
@@ -365,7 +365,7 @@ const Introduction = () => {
                 CẢM NHẬN TỪ KHÁCH HÀNG
               </Title>
               <Paragraph className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} text-lg text-center max-w-3xl mx-auto mb-8`}>
-                Hãy lắng nghe những ý kiến từ khách hàng đã trải nghiệm dịch vụ của Pet Heaven!
+                Hãy lắng nghe những ý kiến từ khách hàng đã trải nghiệm dịch vụ của Pet Corner!
               </Paragraph>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {testimonials.map((testimonial, index) => (
@@ -402,7 +402,7 @@ const Introduction = () => {
                 HÌNH ẢNH THÚ CƯNG
               </Title>
               <Paragraph className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} text-lg text-center max-w-3xl mx-auto mb-8`}>
-                Khám phá những khoảnh khắc đáng yêu của các thú cưng được chăm sóc tại Pet Heaven!
+                Khám phá những khoảnh khắc đáng yêu của các thú cưng được chăm sóc tại Pet Corner!
               </Paragraph> */}
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
                 {petGallery.map((image, index) => (

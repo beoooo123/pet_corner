@@ -119,7 +119,7 @@ ${enrichedOrderDetails
 Nếu bạn cần thêm thông tin hoặc hỗ trợ, vui lòng liên hệ với chúng tôi qua số ${ENV_VARS.HOTLINE} hoặc email ${ENV_VARS.EMAIL_USER}.
 
 Trân trọng,
-Pet Heaven
+Pet Corner
 Hotline: ${ENV_VARS.HOTLINE}
 Email: ${ENV_VARS.EMAIL_USER}`;
 
@@ -171,7 +171,7 @@ Email: ${ENV_VARS.EMAIL_USER}`;
       <p style="color: #555; line-height: 1.6;">
         Nếu bạn cần thêm thông tin hoặc hỗ trợ, vui lòng liên hệ với chúng tôi qua hotline <strong>${ENV_VARS.HOTLINE}</strong> hoặc email <strong>${ENV_VARS.EMAIL_USER}</strong>.
       </p>
-      <p style="color: #555; text-align: center;">Trân trọng,<br><strong>Pet Heaven</strong></p>
+      <p style="color: #555; text-align: center;">Trân trọng,<br><strong>Pet Corner</strong></p>
     </div>
   `;
 
