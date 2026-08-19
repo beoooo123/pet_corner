@@ -3,19 +3,19 @@ import { ICategory } from '../interfaces/category.interface.js';
 import { CategoryStatus } from '../enums/category.enum.js';
 
 const categorySchema: Schema<ICategory> = new Schema<ICategory>({
-  name: {
-    type: String,
-    default: ''
-  },
-  description: {
-    type: String,
-    default: ''
-  },
-  status: {
-    type: String,
-    enum: CategoryStatus,
-    default: CategoryStatus.ACTIVE
-  }
+  name: {
+    type: String,
+    default: ''
+  },
+  description: {
+    type: String,
+    default: ''
+  },
+  status: {
+    type: String,
+    enum: CategoryStatus,
+    default: CategoryStatus.ACTIVE
+  }
 });
 
 const categoryModel = mongoose.models.category || model('category', categorySchema);
