@@ -178,31 +178,322 @@ const BannerList: React.FC = () => {
       title: "Trạng thái",
       dataIndex: "status",
       key: "status",
+import React, { useEffect, useState } from "react";
+import {
+  Card,
+  Button,
+  Table,
+  Modal,
+  Space,
+  Tag,
+  notification,
+} from "antd";
+import {
+  PlusOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  ArrowUpOutlined,
+  ArrowDownOutlined,
+} from "@ant-design/icons";
+import { motion } from "framer-motion";
+import categoryApi from "../../api/categoryApi";
+import CategoryModal from "../components/categoryModal";
+
+interface Category {
+  key: string;
+  _id: string;
+  name: string;
+  description: string;
+  order: number;
+  status: string;
+}
+
+const CategoryList: React.FC = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [editingCategory, setEditingCategory] =
+    useState<Category | null>(null);
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    setLoading(true);
+
+    try {
+      const response = await categoryApi.getAll();
+
+      const categoryList = response.data.data || [];
+
+      const formatted = categoryList
+        .map((category: any) => ({
+          key: category._id,
+          _id: category._id,
+          name: category.name,
+          description: category.description,
+          order: category.order,
+          status: category.status,
+        }))
+        .sort(
+          (a: Category, b: Category) =>
+            a.order - b.order
+        );
+
+      setCategories(formatted);
+    } catch (error) {
+      console.error(
+        "Lỗi khi lấy danh sách danh mục:",
+        error
+      );
+
+      notification.error({
+        message: "Lỗi",
+        description:
+          "Lỗi khi tải danh sách danh mục!",
+        placement: "topRight",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const showModal = (category?: Category) => {
+    setEditingCategory(category || null);
+    setIsModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+    setEditingCategory(null);
+  };
+
+  const handleDelete = (record: Category) => {
+    Modal.confirm({
+      title: "Xác nhận",
+      content: `Bạn có chắc chắn muốn xóa danh mục "${record.name}"?`,
+      okText: "Đồng ý",
+      cancelText: "Hủy bỏ",
+
+      onOk: async () => {
+        try {
+          await categoryApi.delete(record._id);
+
+          notification.success({
+            message: "Thành công",
+            description:
+              "Đã xóa danh mục thành công!",
+            placement: "topRight",
+          });
+
+          fetchCategories();
+        } catch (error) {
+          console.error(
+            "Error deleting category:",
+            error
+          );
+
+          notification.error({
+            message: "Lỗi",
+            description:
+              "Không thể xóa danh mục!",
+            placement: "topRight",
+          });
+        }
+      },
+    });
+  };
+
+  const handleToggleStatus = async (
+    record: Category
+  ) => {
+    const newStatus =
+      record.status === "active"
+        ? "inactive"
+        : "active";
+
+    try {
+      await categoryApi.toggleStatus(
+        record._id,
+        newStatus
+      );
+
+      notification.success({
+        message: "Thành công",
+        description:
+          "Cập nhật trạng thái danh mục thành công!",
+        placement: "topRight",
+      });
+
+      fetchCategories();
+    } catch (error) {
+      console.error(
+        "Error toggling category status:",
+        error
+      );
+
+      notification.error({
+        message: "Lỗi",
+        description:
+          "Lỗi khi cập nhật trạng thái danh mục!",
+        placement: "topRight",
+      });
+    }
+  };
+
+  const handleMove = async (
+    index: number,
+    direction: "up" | "down"
+  ) => {
+    const targetIndex =
+      direction === "up"
+        ? index - 1
+        : index + 1;
+
+    if (
+      targetIndex < 0 ||
+      targetIndex >= categories.length
+    ) {
+      return;
+    }
+
+    const current = categories[index];
+    const target = categories[targetIndex];
+
+    try {
+      await categoryApi.reorder([
+        {
+          id: current._id,
+          order: target.order,
+        },
+        {
+          id: target._id,
+          order: current.order,
+        },
+      ]);
+
+      fetchCategories();
+    } catch (error) {
+      console.error(
+        "Error reordering category:",
+        error
+      );
+
+      notification.error({
+        message: "Lỗi",
+        description:
+          "Lỗi khi cập nhật thứ tự danh mục!",
+        placement: "topRight",
+      });
+    }
+  };
+
+  const columns = [
+    {
+      title: "Thứ tự",
+      key: "order",
+      width: 150,
+
+      render: (
+        _: any,
+        _record: Category,
+        index: number
+      ) => (
+        <Space>
+          <span>{index + 1}</span>
+
+          <Button
+            icon={<ArrowUpOutlined />}
+            size="small"
+            disabled={index === 0}
+            onClick={() =>
+              handleMove(index, "up")
+            }
+          />
+
+          <Button
+            icon={<ArrowDownOutlined />}
+            size="small"
+            disabled={
+              index === categories.length - 1
+            }
+            onClick={() =>
+              handleMove(index, "down")
+            }
+          />
+        </Space>
+      ),
+    },
+
+    {
+      title: "Tên danh mục",
+      dataIndex: "name",
+      key: "name",
+    },
+
+    {
+      title: "Mô tả",
+      dataIndex: "description",
+      key: "description",
+    },
+
+    {
+      title: "Trạng thái",
+      dataIndex: "status",
+      key: "status",
+
       render: (status: string) => (
-        <Tag color={status === "active" ? "success" : "error"}>
-          {status === "active" ? "Hoạt động" : "Bị khóa"}
+        <Tag
+          color={
+            status === "active"
+              ? "success"
+              : "error"
+          }
+        >
+          {status === "active"
+            ? "Hoạt động"
+            : "Bị khóa"}
         </Tag>
       ),
     },
+
     {
       title: "Chức năng",
       key: "action",
-      width: 160,
-      render: (_: any, record: Banner) => (
+      width: 180,
+
+      render: (
+        _: any,
+        record: Category
+      ) => (
         <Space>
           <Button
             icon={<EditOutlined />}
             size="small"
-            onClick={() => showModal(record)}
+            onClick={() =>
+              showModal(record)
+            }
           />
-          <Button size="small" onClick={() => handleToggleStatus(record)}>
-            {record.status === "active" ? "Khóa" : "Mở"}
+
+          <Button
+            size="small"
+            onClick={() =>
+              handleToggleStatus(record)
+            }
+          >
+            {record.status === "active"
+              ? "Khóa"
+              : "Mở"}
           </Button>
+
           <Button
             danger
             icon={<DeleteOutlined />}
             size="small"
-            onClick={() => handleDelete(record)}
+            onClick={() =>
+              handleDelete(record)
+            }
           />
         </Space>
       ),
@@ -211,12 +502,20 @@ const BannerList: React.FC = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+      transition={{
+        duration: 0.5,
+      }}
     >
       <Card
-        title="Quản lý banner trang chủ"
+        title="Quản lý danh mục"
         bordered={false}
         className="shadow-sm"
         extra={
@@ -225,27 +524,29 @@ const BannerList: React.FC = () => {
             icon={<PlusOutlined />}
             onClick={() => showModal()}
           >
-            Thêm banner
+            Thêm danh mục
           </Button>
         }
       >
         <Table
           columns={columns}
-          dataSource={banners}
+          dataSource={categories}
           loading={loading}
           pagination={false}
           className="overflow-x-auto"
         />
       </Card>
 
-      <BannerModal
+      <CategoryModal
         visible={isModalVisible}
         onClose={closeModal}
-        onReload={fetchBanners}
-        banner={editingBanner}
+        onReload={fetchCategories}
+        category={editingCategory}
       />
     </motion.div>
   );
 };
+
+export default CategoryList;
 
 export default BannerList;
