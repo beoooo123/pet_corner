@@ -102,7 +102,7 @@ export default function Address() {
           setDistricts(data.districts || []);
           setWards([]);
           setSelectedDistrict(null);
-          addressForm.setFieldsValue({ district: null, ward: null });
+addressForm.setFieldsValue({ district: null, ward: null });
         })
         .catch((error) => {
           console.error("Lỗi khi fetch quận/huyện:", error);
@@ -184,7 +184,7 @@ export default function Address() {
       .validateFields()
       .then(async (values) => {
         const accountID = localStorage.getItem("accountID")?.replace(/"/g, "").trim();
-        if (!accountID || !user || editAddressIndex === null) {
+if (!accountID || !user || editAddressIndex === null) {
           message.error("Không tìm thấy thông tin người dùng hoặc địa chỉ!");
           return;
         }
@@ -257,7 +257,7 @@ export default function Address() {
 
       setSelectedDistrict(district.code);
       const wardResponse = await fetch(
-        `https://provinces.open-api.vn/api/d/${district.code}?depth=2`
+`https://provinces.open-api.vn/api/d/${district.code}?depth=2`
       );
       const wardData = await wardResponse.json();
       setWards(wardData.wards || []);
@@ -339,12 +339,11 @@ export default function Address() {
       localStorage.setItem("userData", JSON.stringify(updatedUser));
       message.success("Đặt địa chỉ mặc định thành công!");
     } catch (error) {
-      const errorMessage = error.response?.data?.message || error.message || "Lỗi không xác định";
+const errorMessage = error.response?.data?.message || error.message || "Lỗi không xác định";
       message.error(`Đặt địa chỉ mặc định thất bại: ${errorMessage}`);
       console.error("Lỗi khi đặt địa chỉ mặc định:", error);
     }
   };
-
   const validatePhoneNumber = (_: any, value: string) => {
     const phoneRegex = /^(03|05|07|08|09)[0-9]{8}$/; // Bắt đầu bằng 03, 05, 07, 08, 09 và đủ 10 số
     if (value && !phoneRegex.test(value)) {
@@ -406,7 +405,7 @@ export default function Address() {
                         <span className="px-3 py-1 text-xs font-medium text-orange-700 bg-orange-100 rounded-full">
                           Mặc định
                         </span>
-                      )}
+)}
                     </div>
                     <p className="text-gray-600 max-w-2xl">{addr.address}</p>
                   </div>
@@ -484,7 +483,7 @@ export default function Address() {
           form={addressForm}
           layout="vertical"
           className="space-y-6"
-        >
+>
           <Item
             name="name"
             label={<span className="text-base font-semibold text-gray-700">Họ và tên</span>}
@@ -495,7 +494,106 @@ export default function Address() {
               className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
             />
           </Item>
-          
+          <Item
+            name="phone"
+            label={<span className="text-base font-semibold text-gray-700">Số điện thoại</span>}
+            rules={[
+              { required: true, message: 'Vui lòng nhập số điện thoại!' },
+              { validator: validatePhoneNumber }
+            ]}
+          >
+            <Input
+              placeholder="Nhập số điện thoại"
+              className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
+            />
+          </Item>
+          <div className="grid grid-cols-2 gap-4">
+            <Item
+              name="province"
+              label={<span className="text-base font-semibold text-gray-700">Tỉnh/Thành phố</span>}
+              rules={[{ required: true, message: "Vui lòng chọn tỉnh/thành phố!" }]}
+            >
+              <Select
+                placeholder="Chọn tỉnh/thành phố"
+                className="w-full rounded-lg h-12"
+                showSearch
+                optionFilterProp="children"
+                onChange={(value) => setSelectedProvince(value)}
+                dropdownStyle={{ borderRadius: "8px" }}
+              >
+                {provinces.map((province) => (
+                  <Select.Option key={province.code} value={province.code}>
+                    {province.name}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Item>
+            <Item
+              name="district"
+              label={<span className="text-base font-semibold text-gray-700">Quận/Huyện</span>}
+              rules={[{ required: true, message: "Vui lòng chọn quận/huyện!" }]}
+            >
+              <Select
+                placeholder="Chọn quận/huyện"
+                className="w-full rounded-lg h-12"
+                showSearch
+                optionFilterProp="children"
+                disabled={!selectedProvince}
+                onChange={(value) => setSelectedDistrict(value)}
+                dropdownStyle={{ borderRadius: "8px" }}
+              >
+                {districts.map((district) => (
+                  <Select.Option key={district.code} value={district.code}>
+                    {district.name}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Item>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <Item
+              name="ward"
+label={<span className="text-base font-semibold text-gray-700">Phường/Xã</span>}
+              rules={[{ required: true, message: "Vui lòng chọn phường/xã!" }]}
+            >
+              <Select
+                placeholder="Chọn phường/xã"
+                className="w-full rounded-lg h-12"
+                showSearch
+                optionFilterProp="children"
+                disabled={!selectedDistrict}
+                dropdownStyle={{ borderRadius: "8px" }}
+              >
+                {wards.map((ward) => (
+                  <Select.Option key={ward.code} value={ward.code}>
+                    {ward.name}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Item>
+            <Item
+              name="address"
+              label={<span className="text-base font-semibold text-gray-700">Địa chỉ nhà</span>}
+              rules={[{ required: true, message: "Vui lòng nhập địa chỉ nhà!" }]}
+            >
+              <Input
+                placeholder="Nhập địa chỉ nhà"
+                className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
+              />
+            </Item>
+          </div>
+        </Form>
+      </Modal>
+
+      <Modal
+        title={<span className="text-xl font-semibold text-gray-800">Chỉnh sửa địa chỉ</span>}
+        open={isEditModalVisible}
+        onOk={handleEditOk}
+        onCancel={() => {
+          setIsEditModalVisible(false);
+          resetAddressForm();
+          setEditAddressIndex(null);
+        }}
         okText="Lưu"
         cancelText="Hủy"
         okButtonProps={{
@@ -531,7 +629,7 @@ export default function Address() {
             ]}
           >
             <Input
-              placeholder="Nhập số điện thoại"
+placeholder="Nhập số điện thoại"
               className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
             />
           </Item>
@@ -601,7 +699,7 @@ export default function Address() {
               name="address"
               label={<span className="text-base font-semibold text-gray-700">Địa chỉ nhà</span>}
               rules={[{ required: true, message: "Vui lòng nhập địa chỉ nhà!" }]}
-            >
+>
               <Input
                 placeholder="Nhập địa chỉ nhà"
                 className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
