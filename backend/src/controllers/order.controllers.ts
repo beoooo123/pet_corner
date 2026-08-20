@@ -25,7 +25,18 @@ export const createOrderAfterPayment = async (req: Request, res: Response): Prom
   let transactionCommitted = false;
 
   try {
-   
+    const {
+      userID = null,
+      payment_typeID,
+      deliveryID = null,
+      couponID = null,
+      orderdate,
+      total_price,
+      shipping_address = null,
+      orderDetails,
+      paymentOrderCode = null,
+      infoUserGuest = null
+    } = req.body;
 
     // Kiểm tra orderDetails
     if (!orderDetails || !Array.isArray(orderDetails)) {
