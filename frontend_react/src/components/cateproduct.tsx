@@ -56,31 +56,6 @@ export default function CateProduct({ data }: { data: APIProduct[] }) {
               className="group relative h-full overflow-hidden rounded-xl border border-gray-100 bg-white p-3 shadow-sm transition-all duration-300 hover:shadow-xl"
               bodyStyle={{ padding: 0 }}
             >
-
-              {/* Image Container */}
-              <Link to={`/detail/${product._id}`}>
-                <div className="relative mb-4 overflow-hidden rounded-lg pt-[100%]">
-                  <motion.div 
-                    className="absolute inset-0 overflow-hidden"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <img
-                      src={`${product.image_url[0]}`}
-                      alt={product.name}
-                      className="h-full w-full object-contain transition-all duration-500"
-                    />
-                    {product.image_url[1] && (
-                      <img
-                        src={`${product.image_url[1]}`}
-                        alt={product.name}
-                        className="absolute inset-0 h-full w-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                      />
-                    )}
-                  </motion.div>
-                </div>
-              </Link>
-
               {/* Discount Badge */}
               {product.discount > 0 && (
                 <motion.div
@@ -95,16 +70,6 @@ export default function CateProduct({ data }: { data: APIProduct[] }) {
                   />
                 </motion.div>
               )}
-
-              {/* Product Info */}
-              <div className="space-y-3 px-2 text-center">
-                {/* Rating */}
-                {/* <div className="flex items-center justify-center gap-1">
-                  {[...Array(5)].map((_, index) => (
-                    <BsStarFill key={index} className="text-yellow-400 text-sm" />
-                  ))}
-                </div> */}
-
                 {/* Name */}
                 <Link to={`/detail/${product._id}`}>
                   <h3 className="line-clamp-2 min-h-[2.5rem] text-sm font-medium text-gray-800 transition-colors duration-300 group-hover:text-[#FFA500]">
