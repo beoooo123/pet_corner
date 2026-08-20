@@ -7,7 +7,17 @@ import brandApi from "../api/brandApi";
 
 const { Title } = Typography;
 
+interface Tag {
+  _id: string;
+  tag_name: string;
+  category_id?: string;
+}
 
+interface Brand {
+  _id: string;
+  brand_name: React.ReactNode;
+  name: string;
+}
 
 interface Category {
   _id: string;
