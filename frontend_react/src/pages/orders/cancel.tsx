@@ -3,23 +3,25 @@ import { Typography, Button, Space } from "antd";
 
 const { Title, Text } = Typography;
 
-const CancelPage = () => {
+const SuccessPage = () => {
   return (
     <div style={{ textAlign: "center", padding: "50px" }}>
       <Space direction="vertical" size="large">
-        <Title className="text-red-400" level={3}>
-          Huỷ đơn hàng thành công
+        <Title className="text-green-500" level={3}>
+          Đặt hàng thành công
         </Title>
+
         <Text>
-          Huỷ đơn hàng thì sao? Hãy liên hệ với chúng tôi để được hỗ trợ tốt
-          nhất.
+          Cảm ơn bạn đã mua hàng. Đơn hàng của bạn đã được tiếp nhận và đang
+          được xử lý.
         </Text>
+
         <Button type="primary" size="large">
-          Liên hệ hỗ trợ
+          Xem đơn hàng
         </Button>
       </Space>
     </div>
   );
 };
 
-export default CancelPage;
+export default SuccessPage;
