@@ -11,6 +11,12 @@ export default function Loader() {
           <div className="absolute h-24 w-24 rounded-full border-4 border-t-4 border-[#FFA500] opacity-20"></div>
           <div className="absolute h-24 w-24 animate-spin rounded-full border-4 border-t-4 border-transparent border-t-[#FFA500]"></div>
 
+          {/* Paw print in center */}
+          <div className="absolute left-1/2 top-12 -translate-x-1/2 -translate-y-1/2 transform">
+            <FaPaw className="h-10 w-10 animate-pulse text-[#FFA500]" />
+          </div>
+        </div>
+
         {/* Loading text */}
         <div className="mt-4 text-center">
           <p className="text-lg font-medium text-[#FFA500]">Đang tải</p>
