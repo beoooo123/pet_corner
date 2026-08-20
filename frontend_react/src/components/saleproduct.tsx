@@ -35,6 +35,18 @@ export default function SaleProduct({ data }: { data: Product[] }) {
       return;
     }
 
+    const item = {
+      id: product._id,
+      name: product.name,
+      price: Number(product.price * (1 - product.discount / 100)),
+      image: product.image_url[0] || "/placeholder-image.jpg",
+      stockQuantity: product.quantity || 0,
+    };
+
+    dispatch(addToCart({ item, quantity }));
+    navigate("/checkout");
+  };
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -103,6 +115,18 @@ export default function SaleProduct({ data }: { data: Product[] }) {
   if (!data || data.length === 0) {
     return <Loader />;
   }
+
+  return (
+    <>
+      {/* Header */}
+<div className="flex items-center justify-between">
+        <div className="relative ml-[15px] w-[200px] rounded-t-lg border-l border-r border-t border-[#FFA500] px-2 py-2 sm:ml-[30px] sm:w-[250px] sm:px-4 md:w-[300px]">
+          <div className="absolute -top-7 left-3 z-10 bg-white px-2">
+            <img
+              src="/images/icons/paw.png"
+              alt="Paw Icon"
+              className="h-8 w-8 sm:h-12 sm:w-12 md:h-[50px] md:w-[50px]"
+            />
           </div>
           <h2 className="relative z-20 text-center text-base font-semibold sm:text-lg">
             sản phẩm giảm GIá
@@ -159,7 +183,7 @@ export default function SaleProduct({ data }: { data: Product[] }) {
                       )}
                     </p>
                     {product.discount > 0 && (
-                      <p className="text-sm text-gray-400 line-through sm:text-base">
+<p className="text-sm text-gray-400 line-through sm:text-base">
                         {new Intl.NumberFormat("vi-VN", {
                           style: "currency",
                           currency: "VND",
