@@ -40,11 +40,6 @@ const publicPageNameMapping: { [key: string]: string } = {
   checkout: "Thanh toán",
   userprofile: "Hồ sơ người dùng",
   account: "Tài khoản của tôi",
-  "address": "Địa chỉ của tôi",
-  order: "Đơn hàng của tôi",
-  booking: "Lịch hẹn của tôi",
-  "change-password": "Đổi mật khẩu",
-  "orders": "Đơn hàng",
   "bookings": "Lịch hẹn",
   
 };
@@ -68,29 +63,7 @@ const Navigation: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    // Fetch product details for /detail/:id
-    if (isDetailPage && id) {
-      const fetchProduct = async () => {
-        try {
-          setLoading(true);
-          setError(null);
-          const response = await productsApi.getProductByID(id);
-          console.log("Product API response:", response.data);
-          setProduct(response.data.product);
-        } catch (err: any) {
-          setError(
-            `Không thể tải thông tin sản phẩm: ${
-              err.message || "Lỗi không xác định"
-            }`
-          );
-          setProduct(null);
-        } finally {
-          setLoading(false);
-        }
-      };
-      fetchProduct();
-    }
+  
 
   }, [id, isDetailPage, isBlogDetailPage]);
 
@@ -105,12 +78,6 @@ const Navigation: React.FC = () => {
     public: "whitespace-nowrap",
   };
 
-  const titleStyles = {
-    admin: "text-lg sm:text-xl md:text-2xl m-0 text-black truncate",
-  };
-
-  const getDisplayName = (name: string) => {
-    if (isAdminPage) {
       return (
         adminPageNameMapping[name.toLowerCase()] ||
         name.charAt(0).toUpperCase() + name.slice(1).replace(/-/g, " ")
