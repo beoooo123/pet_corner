@@ -13,7 +13,7 @@ const SuccessPage = () => {
 
         <Text>
           Cảm ơn bạn đã mua hàng. Đơn hàng của bạn đã được tiếp nhận và đang
-          được xử lý.
+          được xử lý.git
         </Text>
 
         <Button type="primary" size="large">

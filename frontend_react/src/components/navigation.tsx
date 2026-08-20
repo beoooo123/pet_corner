@@ -93,8 +93,7 @@ const Navigation: React.FC = () => {
     }
 
   }, [id, isDetailPage, isBlogDetailPage]);
-
-  const containerStyles = {
+const containerStyles = {
     admin: "bg-white p-4 rounded-lg shadow-sm mb-4 overflow-x-auto",
     public:
       "px-4 sm:px-6 md:px-8 lg:px-[154px] py-2 sm:py-3 md:py-4 text-sm sm:text-base overflow-x-auto",
@@ -186,7 +185,7 @@ const Navigation: React.FC = () => {
           ) : (
             <Breadcrumb.Item>
               <span className={currentPageStyles}>Chi tiết sản phẩm</span>
-            </Breadcrumb.Item>
+</Breadcrumb.Item>
           )
         ) : isBlogDetailPage ? (
           blog ? (
