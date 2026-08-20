@@ -166,19 +166,7 @@ export default function SaleProduct({ data }: { data: Product[] }) {
                   <Link to={`/detail/${product._id}`}>
                     <img
                       src={`${product.image_url[0]}`}
-                      alt={product.name}
-                      className="h-full w-full object-cover transition-transform duration-500 hover:scale-110"
-                    />
-                  </Link>
-                </div>
-                <div className="flex w-3/4 flex-col justify-between p-2">
-                  <p className="text-xs font-bold sm:text-sm">{product.name}</p>
-                  <div className="mt-2 flex items-center gap-2">
-                    <p className="text-sm font-bold text-[#FFA500] transition-colors duration-300 sm:text-base">
-                      {new Intl.NumberFormat("vi-VN", {
-                        style: "currency",
-                        currency: "VND",
-                      }).format(
+                      alt={product.name
                         Number(product.price * (1 - product.discount / 100))
                       )}
                     </p>
