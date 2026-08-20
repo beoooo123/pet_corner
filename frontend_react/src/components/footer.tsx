@@ -216,27 +216,6 @@ export default function Footer() {
                 direction="vertical"
                 size="small"
                 className="space-y-1 text-xs sm:text-sm"
-              >
-                {categories.map((category) => (
-                  <Link
-                    key={category._id}
-                    to={`/product?category=${category.name.toLowerCase()}`}
-                    className="hover:text-[#FFA500] transition-colors duration-300"
-                  >
-                    {category.name === "Chó" ? "Dành cho chó" : category.name === "Mèo" ? "Dành cho mèo" : category.name}
-                  </Link>
-                ))}
-                <a href="#">Thương hiệu</a>
-                <a href="#">Bộ sưu tập</a>
-              </Space>
-            </div>
-
-            {/* Pet Corner Shop */}
-            <div className="text-center lg:text-left">
-              <Title level={5} className="mb-2 text-sm font-bold sm:text-base">
-                Pet Corner shop
-              </Title>
-              <Space
                 direction="vertical"
                 size="small"
                 className="space-y-1 text-xs sm:text-sm"
@@ -273,17 +252,7 @@ export default function Footer() {
               <Space
                 direction="vertical"
                 size="small"
-                className="space-y-1 text-xs sm:text-sm"
-              >
-                <Space>
-                  <BsGeoAltFill />
-                  <Text>116 Nguyễn Văn Thủ, P.Đa Kao, Q.1, TP.HCM</Text>
-                </Space>
-                <Space>
-                  <MdEmail />
-                  <a href="mailto:petcorner993@gmail.com" className="underline">
-                    petcorner993@gmail.com
-                  </a>
+            
                 </Space>
                 <Space>
                   <FaPhoneAlt />
@@ -295,7 +264,7 @@ export default function Footer() {
               <Space
                 size="large"
                 className="mt-4 flex justify-center gap-5 lg:mt-[70px] lg:justify-start"
-              >
+              
                 <FaFacebookF className="cursor-pointer text-xl text-gray-600 hover:text-[#FFA500] sm:text-2xl lg:text-[34px]" />
                 <FaInstagram className="cursor-pointer text-xl text-gray-600 hover:text-[#FFA500] sm:text-2xl lg:text-[34px]" />
                 <FaTwitter className="cursor-pointer text-xl text-gray-600 hover:text-[#FFA500] sm:text-2xl lg:text-[34px]" />
