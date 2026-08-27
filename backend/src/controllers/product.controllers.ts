@@ -15,7 +15,22 @@ const removeVietnameseTones = (str: string): string => {
   return str.toLowerCase();
 };
 
+export const getAllProduct = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { search, tag, status, brand, category, priceMin, priceMax, page = '1', limit = '10' } = req.query;
+    const query: any = {};
 
+    // 1. Lọc theo trạng thái (status)
+    if (status && typeof status === 'string') {
+      if (!Object.values(ProductStatus).includes(status as ProductStatus)) {
+        res.status(400).json({
+          success: false,
+          message: `Trạng thái không hợp lệ. Chỉ chấp nhận ${Object.values(ProductStatus).join(', ')}`
+        });
+        return;
+      }
+      query.status = status;
+    }
 
     // 2. Lọc theo tag (tag_id)
     if (tag && typeof tag === 'string') {
