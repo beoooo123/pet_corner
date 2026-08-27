@@ -23,7 +23,27 @@ export const getOrderDetails = async (req: Request, res: Response) => {
   }
 };
 
+// Lấy order details theo orderId
+export const getOrderDetailsByOrderId = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
 
+    const orderDetails = await orderDetailModel
+      .find({ orderId: id })
+      .populate('productId')
+      .populate('orderId')
+      .populate('serviceId');
+
+    if (!orderDetails.length) {
+      res.status(404).json({ success: false, message: 'No order details found for this order' });
+      return;
+    }
+
+    res.status(200).json({ success: true, data: orderDetails });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Error retrieving order details', error });
+  }
+};
 
 // Tạo order detail mới
 export const createOrderDetail = async (req: Request, res: Response) => {

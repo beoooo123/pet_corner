@@ -63,15 +63,7 @@ export const createPayment = async (req: Request, res: Response): Promise<void> 
   }
 };
 
-// Hàm sắp xếp object để tạo chữ ký đúng
-function sortObject(obj: Record<string, string | number>): Record<string, string> {
-  const sorted: Record<string, string> = {};
-  const keys: string[] = Object.keys(obj).sort();
-  keys.forEach((key) => {
-    sorted[key] = encodeURIComponent(obj[key] as string).replace(/%20/g, '+');
-  });
-  return sorted;
-}
+
 
 // Xác thực chữ ký VNPay gửi về (return URL) trước khi tin bất kỳ trạng thái thanh toán nào.
 // Không dùng vnp_ResponseCode do client tự đọc từ URL để quyết định PAID/PENDING —
