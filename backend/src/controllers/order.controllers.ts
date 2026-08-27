@@ -43,16 +43,7 @@ export const createOrderAfterPayment = async (req: Request, res: Response): Prom
       throw new Error('Thiếu các trường bắt buộc');
     }
 
-    // Chuẩn hóa orderDetails
-    const normalizedOrderDetails = orderDetails.map((detail: any) => ({
-      productId: detail.productId || detail.productID || null,
-      serviceId: detail.serviceId || detail.serviceID || null,
-      quantity: detail.quantity,
-      product_price: detail.product_price || detail.productPrice || null,
-      booking_date: detail.booking_date || detail.bookingDate,
-      petName: detail.petName,
-      petType: detail.petType
-    }));
+    
 
     const isBooking = normalizedOrderDetails.every((detail: any) => detail.serviceId && !detail.productId);
     const isOrder = normalizedOrderDetails.some((detail: any) => detail.productId);
