@@ -25,6 +25,4 @@ const orderDetailSchema = new Schema(
   { timestamps: true }
 );
 
-const orderDetailModel = mongoose.models.orderDetail || model('orderDetail', orderDetailSchema);
 
-export default orderDetailModel;

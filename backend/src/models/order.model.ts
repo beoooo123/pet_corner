@@ -8,7 +8,6 @@ import coupon from '../models/coupon.model.js';
 import { DeliveryStatus } from '../enums/delivery.enum.js';
 import { BookingStatus } from '../enums/booking.enum.js';
 
-
 const orderSchema: Schema<IOrder> = new Schema<IOrder>(
   {
     userID: { type: Schema.Types.ObjectId, ref: user, required: false },
