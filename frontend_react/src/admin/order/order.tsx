@@ -40,17 +40,107 @@ interface Product {
 }
 
 interface Order {
-  key: string;
-  orderId: string;
-  fullname: string;
-  phone?: string;
-  orderDate?: string;
-  product: string;
-  status: 'PENDING' | 'PROCESSING' | 'SHIPPING' | 'DELIVERED' | 'CANCELLED';
-  paymentStatus: 'UNPAID' | 'PAID' | 'FAILED' | 'CASH_ON_DELIVERY';
-  quantity?: number;
-  price?: string;
-  products?: Product[];
+key: string;
+orderId: string;
+fullname: string;
+phone?: string;
+orderDate: string;
+product: string;
+status: OrderStatus;
+paymentStatus: PaymentStatus;
+quantity: number;
+totalPrice: number;
+products: Product[];
+}
+
+interface FilterParams {
+status?: string;
+paymentStatus?: string;
+dateRange?: [moment.Moment, moment.Moment] | null;
+search?: string;
+}
+
+const statusConfig: Record<
+string,
+{ color: string; text: string }
+
+= {
+PENDING: {
+color: "warning",
+text: "Chờ xử lý",
+},
+PROCESSING: {
+color: "processing",
+text: "Đang xử lý",
+},
+SHIPPING: {
+color: "blue",
+text: "Đang vận chuyển",
+},
+SHIPPED: {
+color: "cyan",
+text: "Đã giao hàng",
+},
+DELIVERED: {
+color: "success",
+text: "Hoàn thành",
+},
+CANCELLED: {
+color: "error",
+text: "Đã hủy",
+},
+};
+
+const paymentConfig: Record<
+string,
+{ color: string; text: string }
+
+= {
+UNPAID: {
+color: "error",
+text: "Chưa thanh toán",
+},
+PAID: {
+color: "success",
+text: "Đã thanh toán",
+},
+FAILED: {
+color: "warning",
+text: "Thanh toán thất bại",
+},
+CASH_ON_DELIVERY: {
+color: "blue",
+text: "Thanh toán khi nhận",
+},
+};
+
+const OrderList: React.FC = () => {
+const [isModalVisible, setIsModalVisible] = useState(false);
+const [selectedOrder, setSelectedOrder] =
+useState<Order | null>(null);
+
+const [selectedRows, setSelectedRows] = useState<string[]>([]);
+const [allOrders, setAllOrders] = useState<Order[]>([]);
+const [loading, setLoading] = useState(false);
+
+const [filters, setFilters] = useState<FilterParams>({});
+
+const [form] = Form.useForm();
+
+// =========================
+// FETCH ORDERS
+// =========================
+const fetchOrders = async () => {
+try {
+setLoading(true);
+
+  const response = await orderApi.getAll();
+
+  if (!response?.data?.result) {
+    message.error("Không thể tải danh sách đơn hàng");
+    setAllOrders([]);
+    return;
+  }
 }
 
 interface FilterParams {
@@ -516,6 +606,119 @@ const OrderList: React.FC = () => {
                       </div>
                     </div>
                   </div>
+orderDetails.forEach((detail: any) => {
+    const order = detail.orderId;
+
+    if (!order?._id) return;
+
+    const orderId = order._id;
+
+    if (!groupedOrders[orderId]) {
+      groupedOrders[orderId] = {
+        orderId,
+        fullname:
+          order.userID?.fullname || "Không xác định",
+        phone:
+          order.userID?.phone || "Chưa có số điện thoại",
+        orderDate: order.order_date,
+        status: order.status || "PENDING",
+        paymentStatus:
+          order.payment_status || "UNPAID",
+        totalPrice: order.total_price || 0,
+        products: [],
+      };
+    }
+
+    groupedOrders[orderId].products.push({
+      orderDetailId: detail._id,
+      productId: detail.productId?._id || null,
+      productName:
+        detail.productId?.name || "Không xác định",
+      productPrice: detail.product_price || 0,
+      quantity: detail.quantity || 0,
+      totalPrice: detail.total_price || 0,
+    });
+  });
+
+  const formattedOrders: Order[] =
+    Object.values(groupedOrders).map(
+      (order: any): Order => ({
+        key: order.orderId,
+        orderId: order.orderId,
+        fullname: order.fullname,
+        phone: order.phone,
+        orderDate: order.orderDate,
+        product: order.products
+          .map((item: Product) => item.productName)
+          .join(", "),
+        status: order.status,
+        paymentStatus: order.paymentStatus,
+        quantity: order.products.reduce(
+          (total: number, item: Product) =>
+            total + item.quantity,
+          0
+        ),
+        totalPrice: order.totalPrice,
+        products: order.products,
+      })
+    );
+
+  formattedOrders.sort((a, b) =>
+    moment(b.orderDate).valueOf() -
+    moment(a.orderDate).valueOf()
+  );
+
+  setAllOrders(formattedOrders);
+} catch (error: any) {
+  console.error(
+    "Lỗi tải đơn hàng:",
+    error?.response?.data || error?.message
+  );
+
+  message.error("Tải danh sách đơn hàng thất bại");
+  setAllOrders([]);
+} finally {
+  setLoading(false);
+}
+
+};
+
+useEffect(() => {
+fetchOrders();
+}, []);
+
+// =========================
+// FILTER
+// =========================
+const filteredOrders = useMemo(() => {
+return allOrders.filter((order) => {
+const search = filters.search?.toLowerCase().trim();
+
+  if (filters.status && order.status !== filters.status) {
+    return false;
+  }
+
+  if (
+    filters.paymentStatus &&
+    order.paymentStatus !== filters.paymentStatus
+  ) {
+    return false;
+  }
+
+  if (filters.dateRange) {
+    const [start, end] = filters.dateRange;
+
+    if (
+      !moment(order.orderDate).isBetween(
+        start,
+        end,
+        "day",
+        "[]"
+      )
+    ) {
+      return false;
+    }
+  }
 
                   <div className="col-span-2">
                     {selectedOrder?.products && selectedOrder.products.length > 0 ? (
