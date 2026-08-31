@@ -1,424 +1,295 @@
 import React, { useState, useEffect } from "react";
 import {
-  Card,
-  Button,
-  Table,
-  Modal,
-  Form,
-  Input,
-  Space,
-  notification,
-  Typography,
+  Card,
+  Button,
+  Table,
+  Modal,
+  Form,
+  Input,
+  Space,
+  notification,
 } from "antd";
-import {
-  PlusOutlined,
-  DeleteOutlined,
-  EditOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
+import { PlusOutlined, DeleteOutlined, EditOutlined, SearchOutlined } from "@ant-design/icons";
 import { motion } from "framer-motion";
-import brandApi from "../../api/brandApi";
+import { Typography } from "antd";
+import tagApi from "../../api/tagApi";
 
 const { Title } = Typography;
 
-interface Brand {
-  key: string;
-  id: string;
-  name: string;
+interface Tag {
+  key: string;
+  id: string;
+  name: string;
 }
 
 const removeAccents = (str: string) => {
-  return str
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/đ/g, "d")
-    .replace(/Đ/g, "D");
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .replace(/Đ/g, 'D');
 };
 
-const BrandManager: React.FC = () => {
-  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
+const TagManager: React.FC = () => {
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
+  const [selectedTag, setSelectedTag] = useState<Tag | null>(null);
+  const [tags, setTags] = useState<Tag[]>([]);
+  const [filteredTags, setFilteredTags] = useState<Tag[]>([]);
+  const [searchText, setSearchText] = useState('');
+  const [form] = Form.useForm();
 
-  const [selectedBrand, setSelectedBrand] = useState<Brand | null>(null);
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        const response = await tagApi.getAll();
+        const tagData = response.data.result.map((tag: any) => ({
+          key: tag._id,
+          id: tag._id,
+          name: tag.tag_name || tag.name,
+        }));
+        setTags(tagData);
+        setFilteredTags(tagData); 
+      } catch (error) {
+        console.error("Lỗi khi lấy danh sách tag:", error);
+      }
+    };
+    fetchTags();
+  }, []);
 
-  const [brands, setBrands] = useState<Brand[]>([]);
-  const [filteredBrands, setFilteredBrands] = useState<Brand[]>([]);
+  const handleSearch = (value: string) => {
+    setSearchText(value);
+    const normalizedSearchText = removeAccents(value.toLowerCase());
+    
+    const filtered = tags.filter(tag => {
+      const normalizedTagName = removeAccents(tag.name.toLowerCase());
+      return normalizedTagName.includes(normalizedSearchText);
+    });
+    
+    setFilteredTags(filtered);
+  };
 
-  const [searchText, setSearchText] = useState("");
+  const columns = [
+    {
+      title: "STT",
+      key: "stt",
+      width: 70, 
+      render: (_: any, __: Tag, index: number) => index + 1,
+      align: "left" as const,
+    },
+    {
+      title: "Tên Tag",
+      dataIndex: "name",
+      key: "name",
+      width: 300, 
+      align: "left" as const,
+    },
+    {
+      title: "Chức năng",
+      key: "action",
+      width: 150, 
+      render: (_: any, record: Tag) => (
+        <Space>
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => handleEdit(record)}
+            size="small"
+          />
+          <Button
+            icon={<DeleteOutlined />}
+            danger
+            onClick={() => handleDelete(record)}
+            size="small"
+          />
+        </Space>
+      ),
+      align: "left" as const, // Left aligned
+    },
+  ];
 
-  const [form] = Form.useForm();
+  const handleEdit = (record: Tag) => {
+    setSelectedTag(record);
+    form.setFieldsValue({ name: record.name });
+    setIsEditModalVisible(true);
+  };
 
-  // =========================
-  // LẤY DANH SÁCH BRAND
-  // =========================
-  useEffect(() => {
-    const fetchBrands = async () => {
-      try {
-        const response = await brandApi.getAll();
+  const handleDelete = (record: Tag) => {
+    Modal.confirm({
+      title: "Xác nhận",
+      content: "Bạn có chắc muốn xóa tag này?",
+      okText: "Đồng ý",
+      cancelText: "Hủy bỏ",
+      onOk: async () => {
+        try {
+          await tagApi.delete(record.id);
+          const updatedTags = tags.filter((t) => t.key !== record.key);
+          setTags(updatedTags);
+          setFilteredTags(updatedTags);
+          notification.success({
+            message: "Thành công",
+            description: "Tag đã được xóa thành công!",
+            placement: "topRight",
+            duration: 2,
+          });
+        } catch (error) {
+          console.error("Lỗi khi xóa tag:", error);
+          Modal.error({ title: "Lỗi", content: "Không thể xóa tag!" });
+        }
+      },
+    });
+  };
 
-        const brandData = response.data.result.map((brand: any) => ({
-          key: brand._id,
-          id: brand._id,
-          name: brand.brand_name || brand.name,
-        }));
+  const handleEditModalOk = () => {
+    form.validateFields().then(async (values) => {
+      if (selectedTag) {
+        try {
+          await tagApi.update(selectedTag.id, { tag_name: values.name });
+          const updatedTags = tags.map((t) =>
+            t.key === selectedTag.key ? { ...t, name: values.name } : t
+          );
+          setTags(updatedTags);
+          setFilteredTags(updatedTags);
+          setIsEditModalVisible(false);
+          notification.success({
+            message: "Thành công",
+            description: "Tag đã được cập nhật thành công!",
+            placement: "topRight",
+            duration: 2,
+          });
+        } catch (error) {
+          console.error("Lỗi khi cập nhật tag:", error);
+          Modal.error({ title: "Lỗi", content: "Không thể cập nhật tag!" });
+        }
+      }
+    });
+  };
 
-        setBrands(brandData);
-        setFilteredBrands(brandData);
-      } catch (error) {
-        console.error("Lỗi khi lấy danh sách brand:", error);
+  const handleAddModalOpen = () => {
+    form.resetFields();
+    setIsAddModalVisible(true);
+  };
 
-        notification.error({
-          message: "Lỗi",
-          description: "Không thể lấy danh sách thương hiệu!",
-          placement: "topRight",
-        });
-      }
-    };
+  const handleAddModalOk = () => {
+    form.validateFields().then(async (values) => {
+      try {
+        const response = await tagApi.create({ tag_name: values.name });
+        const tagId = response.tag?._id || response.data?._id || response._id;
+        if (!tagId) {
+          throw new Error("Không tìm thấy ID trong response");
+        }
+        const newTag: Tag = {
+          key: tagId,
+          id: tagId,
+          name: values.name,
+        };
+        const updatedTags = [...tags, newTag];
+        setTags(updatedTags);
+        setFilteredTags(updatedTags);
+        setIsAddModalVisible(false);
+        form.resetFields();
+        notification.success({
+          message: "Thành công",
+          description: "Tag đã được thêm thành công!",
+          placement: "topRight",
+          duration: 2,
+        });
+      } catch (error) {
+        console.error("Lỗi khi thêm tag:", error);
+        Modal.error({ title: "Lỗi", content: "Không thể thêm tag!" });
+      }
+    });
+  };
 
-    fetchBrands();
-  }, []);
+  const handleModalCancel = () => {
+    setIsEditModalVisible(false);
+    setIsAddModalVisible(false);
+    form.resetFields();
+  };
 
-  // =========================
-  // TÌM KIẾM
-  // =========================
-  const handleSearch = (value: string) => {
-    setSearchText(value);
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Card
+        title={
+          <div className="flex items-center gap-4">
+            <Input
+              placeholder="Tìm kiếm..."
+              prefix={<SearchOutlined />}
+              value={searchText}
+              onChange={(e) => handleSearch(e.target.value)}
+              style={{ width: 200 }}
+            />
+          </div>
+        }
+        bordered={false}
+        className="shadow-sm"
+        extra={
+          <div className="space-x-2">
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={handleAddModalOpen}
+            >
+              Thêm Tag
+            </Button>
+          </div>
+        }
+      >
+        <Table
+          columns={columns}
+          dataSource={filteredTags}
+          pagination={{ pageSize: 10 }}
+          className="overflow-x-auto"
+        />
+      </Card>
 
-    const normalizedSearchText = removeAccents(value.toLowerCase());
+      <Modal
+        title="Chỉnh sửa Tag"
+        visible={isEditModalVisible}
+        onOk={handleEditModalOk}
+        onCancel={handleModalCancel}
+        okText="Lưu & Đóng"
+        cancelText="Hủy bỏ"
+      >
+        {selectedTag && (
+          <Form form={form} layout="vertical">
+            <Form.Item label="ID">
+              <Input value={selectedTag.id} disabled />
+            </Form.Item>
+            <Form.Item
+              label="Tên Tag"
+              name="name"
+              rules={[{ required: true, message: "Vui lòng nhập tên tag!" }]}
+            >
+              <Input />
+            </Form.Item>
+          </Form>
+        )}
+      </Modal>
 
-    const filtered = brands.filter((brand) => {
-      const normalizedBrandName = removeAccents(
-        brand.name.toLowerCase()
-      );
-
-      return normalizedBrandName.includes(normalizedSearchText);
-    });
-
-    setFilteredBrands(filtered);
-  };
-
-  // =========================
-  // SỬA BRAND
-  // =========================
-  const handleEdit = (record: Brand) => {
-    setSelectedBrand(record);
-
-    form.setFieldsValue({
-      name: record.name,
-    });
-
-    setIsEditModalVisible(true);
-  };
-
-  // =========================
-  // XÓA BRAND
-  // =========================
-  const handleDelete = (record: Brand) => {
-    Modal.confirm({
-      title: "Xác nhận",
-      content: "Bạn có chắc muốn xóa thương hiệu này?",
-      okText: "Đồng ý",
-      cancelText: "Hủy bỏ",
-
-      onOk: async () => {
-        try {
-          await brandApi.delete(record.id);
-
-          const updatedBrands = brands.filter(
-            (brand) => brand.key !== record.key
-          );
-
-          setBrands(updatedBrands);
-          setFilteredBrands(updatedBrands);
-
-          notification.success({
-            message: "Thành công",
-            description: "Thương hiệu đã được xóa thành công!",
-            placement: "topRight",
-            duration: 2,
-          });
-        } catch (error) {
-          console.error("Lỗi khi xóa brand:", error);
-
-          Modal.error({
-            title: "Lỗi",
-            content: "Không thể xóa thương hiệu!",
-          });
-        }
-      },
-    });
-  };
-
-  // =========================
-  // LƯU CHỈNH SỬA
-  // =========================
-  const handleEditModalOk = () => {
-    form.validateFields().then(async (values) => {
-      if (!selectedBrand) return;
-
-      try {
-        await brandApi.update(selectedBrand.id, {
-          brand_name: values.name,
-        });
-
-        const updatedBrands = brands.map((brand) =>
-          brand.key === selectedBrand.key
-            ? {
-                ...brand,
-                name: values.name,
-              }
-            : brand
-        );
-
-        setBrands(updatedBrands);
-        setFilteredBrands(updatedBrands);
-
-        setIsEditModalVisible(false);
-
-        notification.success({
-          message: "Thành công",
-          description: "Thương hiệu đã được cập nhật thành công!",
-          placement: "topRight",
-          duration: 2,
-        });
-      } catch (error) {
-        console.error("Lỗi khi cập nhật brand:", error);
-
-        Modal.error({
-          title: "Lỗi",
-          content: "Không thể cập nhật thương hiệu!",
-        });
-      }
-    });
-  };
-
-  // =========================
-  // MỞ MODAL THÊM
-  // =========================
-  const handleAddModalOpen = () => {
-    form.resetFields();
-    setIsAddModalVisible(true);
-  };
-
-  // =========================
-  // THÊM BRAND
-  // =========================
-  const handleAddModalOk = () => {
-    form.validateFields().then(async (values) => {
-      try {
-        const response = await brandApi.create({
-          brand_name: values.name,
-        });
-
-        const brandId =
-          response.brand?._id ||
-          response.data?._id ||
-          response._id;
-
-        if (!brandId) {
-          throw new Error("Không tìm thấy ID trong response");
-        }
-
-        const newBrand: Brand = {
-          key: brandId,
-          id: brandId,
-          name: values.name,
-        };
-
-        const updatedBrands = [...brands, newBrand];
-
-        setBrands(updatedBrands);
-        setFilteredBrands(updatedBrands);
-
-        setIsAddModalVisible(false);
-
-        form.resetFields();
-
-        notification.success({
-          message: "Thành công",
-          description: "Thương hiệu đã được thêm thành công!",
-          placement: "topRight",
-          duration: 2,
-        });
-      } catch (error) {
-        console.error("Lỗi khi thêm brand:", error);
-
-        Modal.error({
-          title: "Lỗi",
-          content: "Không thể thêm thương hiệu!",
-        });
-      }
-    });
-  };
-
-  // =========================
-  // ĐÓNG MODAL
-  // =========================
-  const handleModalCancel = () => {
-    setIsEditModalVisible(false);
-    setIsAddModalVisible(false);
-
-    form.resetFields();
-    setSelectedBrand(null);
-  };
-
-  // =========================
-  // COLUMNS
-  // =========================
-  const columns = [
-    {
-      title: "STT",
-      key: "stt",
-      width: 70,
-      align: "left" as const,
-
-      render: (_: any, __: Brand, index: number) => index + 1,
-    },
-
-    {
-      title: "Tên thương hiệu",
-      dataIndex: "name",
-      key: "name",
-      width: 300,
-      align: "left" as const,
-    },
-
-    {
-      title: "Chức năng",
-      key: "action",
-      width: 150,
-      align: "left" as const,
-
-      render: (_: any, record: Brand) => (
-        <Space>
-          <Button
-            icon={<EditOutlined />}
-            onClick={() => handleEdit(record)}
-            size="small"
-          />
-
-          <Button
-            icon={<DeleteOutlined />}
-            danger
-            onClick={() => handleDelete(record)}
-            size="small"
-          />
-        </Space>
-      ),
-    },
-  ];
-
-  return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        y: 20,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-      }}
-      transition={{
-        duration: 0.5,
-      }}
-    >
-      <Card
-        title={
-          <div className="flex items-center gap-4">
-            <Input
-              placeholder="Tìm kiếm..."
-              prefix={<SearchOutlined />}
-              value={searchText}
-              onChange={(e) => handleSearch(e.target.value)}
-              style={{
-                width: 200,
-              }}
-            />
-          </div>
-        }
-        bordered={false}
-        className="shadow-sm"
-        extra={
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={handleAddModalOpen}
-          >
-            Thêm thương hiệu
-          </Button>
-        }
-      >
-        <Table
-          columns={columns}
-          dataSource={filteredBrands}
-          pagination={{
-            pageSize: 10,
-          }}
-          className="overflow-x-auto"
-        />
-      </Card>
-
-      {/* =========================
-          MODAL SỬA
-      ========================= */}
-      <Modal
-        title="Chỉnh sửa thương hiệu"
-        open={isEditModalVisible}
-        onOk={handleEditModalOk}
-        onCancel={handleModalCancel}
-        okText="Lưu & Đóng"
-        cancelText="Hủy bỏ"
-      >
-        {selectedBrand && (
-          <Form form={form} layout="vertical">
-            <Form.Item label="ID">
-              <Input value={selectedBrand.id} disabled />
-            </Form.Item>
-
-            <Form.Item
-              label="Tên thương hiệu"
-              name="name"
-              rules={[
-                {
-                  required: true,
-                  message: "Vui lòng nhập tên thương hiệu!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-          </Form>
-        )}
-      </Modal>
-
-      {/* =========================
-          MODAL THÊM
-      ========================= */}
-      <Modal
-        title="Thêm mới thương hiệu"
-        open={isAddModalVisible}
-        onOk={handleAddModalOk}
-        onCancel={handleModalCancel}
-        okText="Thêm mới"
-        cancelText="Hủy bỏ"
-      >
-        <Form form={form} layout="vertical">
-          <Form.Item
-            label="Tên thương hiệu"
-            name="name"
-            rules={[
-              {
-                required: true,
-                message: "Vui lòng nhập tên thương hiệu!",
-              },
-            ]}
-          >
-            <Input placeholder="Nhập tên thương hiệu..." />
-          </Form.Item>
-        </Form>
-      </Modal>
-    </motion.div>
-  );
+      <Modal
+        title="Thêm mới Tag"
+        visible={isAddModalVisible}
+        onOk={handleAddModalOk}
+        onCancel={handleModalCancel}
+        okText="Thêm mới"
+        cancelText="Hủy bỏ"
+      >
+        <Form form={form} layout="vertical">
+          <Form.Item
+            label="Tên Tag"
+            name="name"
+            rules={[{ required: true, message: "Vui lòng nhập tên tag!" }]}
+          >
+            <Input />
+          </Form.Item>
+        </Form>
+      </Modal>
+    </motion.div>
+  );
 };
 
-export default BrandManager;
+export default TagManager;
