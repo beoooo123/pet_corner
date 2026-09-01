@@ -19,6 +19,8 @@ import AboutUs from "./pages/about-us/about-us";
 import BrandManager from "./admin/brand/brand";
 import TagManager from "./admin/tag/tag";
 import BannerList from "./admin/banner/banner";
+import BlogList from "./admin/blog/blog";
+import BlogCategoryList from "./admin/blog_category/blog_category";
 import DocsPage from "./admin/docs/docs";
 import VerifyOtp from "./pages/verifyOTP/verifyOTP";
 import Search from "./pages/search/search";
@@ -32,6 +34,8 @@ import OrderList from "./admin/order/order";
 import Payment from "./pages/payment/payment";
 import CancelPage from "./pages/orders/cancel";
 import SuccessPage from "./pages/orders/success";
+import Blog from "./pages/blog/blog";
+import BlogDetail from "./pages/blogDetail/blogDetail";
 
 interface User {
   id: string;
@@ -102,6 +106,8 @@ function App() {
         { path: "brands", element: <BrandManager /> },
         { path: "tags", element: <TagManager /> },
         { path: "banners", element: <BannerList /> },
+        { path: "blogs", element: <BlogList /> },
+        { path: "blog-categories", element: <BlogCategoryList /> },
         { path: "coupon", element: <CouponList /> },
         { path: "deliveries", element: <DeliveryList /> },
         { path: "payment-types", element: <PaymentTypeList /> },
@@ -198,6 +204,22 @@ function App() {
           element: (
             <PublicRoute>
               <Search />
+            </PublicRoute>
+          ),
+        },
+        {
+          path: "/blogs",
+          element: (
+            <PublicRoute>
+              <Blog />
+            </PublicRoute>
+          ),
+        },
+        {
+          path: "/blogs/:id",
+          element: (
+            <PublicRoute>
+              <BlogDetail />
             </PublicRoute>
           ),
         },

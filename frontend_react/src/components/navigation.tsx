@@ -3,6 +3,7 @@ import { Breadcrumb } from "antd";
 import { useLocation, Link, useParams } from "react-router-dom";
 import { Typography } from "antd";
 import productsApi from "../api/productsApi";
+import blogApi from "../api/blogApi";
 
 const { Title } = Typography;
 
@@ -55,7 +56,7 @@ const Navigation: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const isAdminPage = location.pathname.startsWith("/admin");
   const isDetailPage = location.pathname.startsWith("/detail");
-  const isBlogDetailPage = location.pathname.startsWith("/blogs");
+  const isBlogDetailPage = location.pathname.startsWith("/blogs/");
 
   const [product, setProduct] = useState<{
     name: string;
@@ -92,6 +93,27 @@ const Navigation: React.FC = () => {
       fetchProduct();
     }
 
+    // Fetch blog details for /blogs/:id
+    if (isBlogDetailPage && id) {
+      const fetchBlog = async () => {
+        try {
+          setLoading(true);
+          setError(null);
+          const response = await blogApi.getBlogById(id);
+          setBlog(response.data.data);
+        } catch (err: any) {
+          setError(
+            `Không thể tải thông tin bài viết: ${
+              err.message || "Lỗi không xác định"
+            }`
+          );
+          setBlog(null);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchBlog();
+    }
   }, [id, isDetailPage, isBlogDetailPage]);
 const containerStyles = {
     admin: "bg-white p-4 rounded-lg shadow-sm mb-4 overflow-x-auto",

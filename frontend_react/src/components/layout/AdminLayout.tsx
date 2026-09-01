@@ -26,6 +26,7 @@ import {
   ReadOutlined,
   CarOutlined,
   CreditCardOutlined,
+  FolderOutlined,
 } from "@ant-design/icons";
 import { Outlet, useNavigate } from "react-router-dom";
 import React from "react";
@@ -174,11 +175,23 @@ const AdminLayout = () => {
       label: "Quản lý mã giảm giá",
       path: "/admin/coupon",
     },
+    {
+      key: "18",
+      icon: <ReadOutlined />,
+      label: "Quản lý bài viết",
+      path: "/admin/blogs",
+    },
+    {
+      key: "19",
+      icon: <FolderOutlined />,
+      label: "Danh mục bài viết",
+      path: "/admin/blog-categories",
+    },
   ];
 
   // Danh sách menu cho employee (loại bỏ các menu nhạy cảm)
   const employeeMenuItems = adminMenuItems.filter((item) =>
-    ["1", "9", "3", "4", "7", "8", "14", "15", "16", "17"].includes(item.key)
+    ["1", "9", "3", "4", "7", "8", "14", "15", "16", "17", "18", "19"].includes(item.key)
   );
 
   // Chọn danh sách menu dựa trên vai trò
