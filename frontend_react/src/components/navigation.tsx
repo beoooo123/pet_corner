@@ -130,57 +130,6 @@ const containerStyles = {
     admin: "text-lg sm:text-xl md:text-2xl m-0 text-black truncate",
   };
 
-  const getDisplayName = (name: string) => {
-    if (isAdminPage) {
-      return (
-        adminPageNameMapping[name.toLowerCase()] ||
-        name.charAt(0).toUpperCase() + name.slice(1).replace(/-/g, " ")
-      );
-    } else {
-      return (
-        publicPageNameMapping[name.toLowerCase()] ||
-        name.charAt(0).toUpperCase() + name.slice(1).replace(/-/g, " ")
-      );
-    }
-  };
-
-  // Xác định tên trang hiện tại
-  const currentPageName =
-    isDetailPage && product
-      ? product.name
-      : isBlogDetailPage && blog
-      ? blog.title
-      : getDisplayName(pathnames[pathnames.length - 1] || "");
-
-  const linkStyles =
-    "text-gray-500 hover:text-gray-700 transition-colors duration-200";
-  const currentPageStyles = "text-black";
-
-  const adminLayout = (
-    <div className={containerStyles.admin}>
-      <Breadcrumb className={breadcrumbStyles.admin} separator=">">
-        {pathnames.map((value, index) => {
-          const last = index === pathnames.length - 1;
-          const to = `/${pathnames.slice(0, index + 1).join("/")}`;
-          return last ? (
-            <Breadcrumb.Item key={to}>
-              <span className={currentPageStyles}>{getDisplayName(value)}</span>
-            </Breadcrumb.Item>
-          ) : (
-            <Breadcrumb.Item key={to}>
-              <Link to={to} className={linkStyles}>
-                {getDisplayName(value)}
-              </Link>
-            </Breadcrumb.Item>
-          );
-        })}
-      </Breadcrumb>
-      <Title level={3} className={titleStyles.admin}>
-        {currentPageName}
-      </Title>
-    </div>
-  );
-
   const publicLayout = (
     <div className={containerStyles.public}>
       <Breadcrumb className={breadcrumbStyles.public} separator="/">
