@@ -118,10 +118,8 @@ const Payment = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [addressForm] = Form.useForm();
   const [provinces, setProvinces] = useState<any[]>([]);
-  const [districts, setDistricts] = useState<any[]>([]);
   const [wards, setWards] = useState<any[]>([]);
   const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
-  const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [editAddressIndex, setEditAddressIndex] = useState<number | null>(null);
 
@@ -269,40 +267,23 @@ const Payment = () => {
   }, [location.state]);
 
   useEffect(() => {
-    fetch("https://provinces.open-api.vn/api/p/")
+    fetch("https://provinces.open-api.vn/api/v2/")
       .then((res) => res.json())
       .then((data) => setProvinces(data))
       .catch((error) => {
-        console.error("Lỗi khi fetch tỉnh:", error);
-        message.error("Không thể tải danh sách tỉnh!");
+        console.error("Lỗi khi fetch tỉnh/thành:", error);
+        message.error("Không thể tải danh sách tỉnh/thành!");
       });
   }, []);
 
   useEffect(() => {
     if (selectedProvince) {
-      fetch(`https://provinces.open-api.vn/api/p/${selectedProvince}?depth=2`)
+      fetch(`https://provinces.open-api.vn/api/v2/p/${selectedProvince}?depth=2`)
         .then((res) => res.json())
         .then((data) => {
-          setDistricts(data.districts || []);
-          setWards([]);
-          setSelectedDistrict(null);
-          addressForm.setFieldsValue({ district: null, ward: null });
+          setWards(data.wards || []);
+          addressForm.setFieldsValue({ ward: null });
         })
-        .catch((error) => {
-          console.error("Lỗi khi fetch quận/huyện:", error);
-          message.error("Không thể tải danh sách quận/huyện!");
-        });
-    } else {
-      setDistricts([]);
-      setWards([]);
-    }
-  }, [selectedProvince]);
-
-  useEffect(() => {
-    if (selectedDistrict) {
-      fetch(`https://provinces.open-api.vn/api/d/${selectedDistrict}?depth=2`)
-        .then((res) => res.json())
-        .then((data) => setWards(data.wards || []))
         .catch((error) => {
           console.error("Lỗi khi fetch phường/xã:", error);
           message.error("Không thể tải danh sách phường/xã!");
@@ -310,13 +291,11 @@ const Payment = () => {
     } else {
       setWards([]);
     }
-  }, [selectedDistrict]);
+  }, [selectedProvince]);
 
   const resetAddressForm = () => {
     addressForm.resetFields();
     setSelectedProvince(null);
-    setSelectedDistrict(null);
-    setDistricts([]);
     setWards([]);
   };
 
@@ -345,11 +324,9 @@ const Payment = () => {
 
         const provinceName =
           provinces.find((p) => p.code === values.province)?.name || "";
-        const districtName =
-          districts.find((d) => d.code === values.district)?.name || "";
         const wardName = wards.find((w) => w.code === values.ward)?.name || "";
         const fullAddress =
-          `${values.address}, ${wardName}, ${districtName}, ${provinceName}`.trim();
+          `${values.address}, ${wardName}, ${provinceName}`.trim();
 
         const newAddress: Address = {
           name: values.name,
@@ -413,11 +390,9 @@ const Payment = () => {
 
         const provinceName =
           provinces.find((p) => p.code === values.province)?.name || "";
-        const districtName =
-          districts.find((d) => d.code === values.district)?.name || "";
         const wardName = wards.find((w) => w.code === values.ward)?.name || "";
         const fullAddress =
-          `${values.address}, ${wardName}, ${districtName}, ${provinceName}`.trim();
+          `${values.address}, ${wardName}, ${provinceName}`.trim();
 
         const updatedAddress: Address = {
           name: values.name,
@@ -822,9 +797,6 @@ const Payment = () => {
                                     address: address.address.split(",")[0],
                                     province: provinces.find((p) =>
                                       address.address.includes(p.name)
-                                    )?.code,
-                                    district: districts.find((d) =>
-                                      address.address.includes(d.name)
                                     )?.code,
                                     ward: wards.find((w) =>
                                       address.address.includes(w.name)
@@ -1317,33 +1289,6 @@ const Payment = () => {
               </Select>
             </Item>
             <Item
-              name="district"
-              label={
-                <span className="text-base font-semibold text-gray-700">
-                  Quận/Huyện
-                </span>
-              }
-              rules={[{ required: true, message: "Vui lòng chọn quận/huyện!" }]}
-            >
-              <Select
-                placeholder="Chọn quận/huyện"
-                className="w-full rounded-lg h-12"
-                showSearch
-                optionFilterProp="children"
-                disabled={!selectedProvince}
-                onChange={(value) => setSelectedDistrict(value)}
-                dropdownStyle={{ borderRadius: "8px" }}
-              >
-                {districts.map((district) => (
-                  <Select.Option key={district.code} value={district.code}>
-                    {district.name}
-                  </Select.Option>
-                ))}
-              </Select>
-            </Item>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <Item
               name="ward"
               label={
                 <span className="text-base font-semibold text-gray-700">
@@ -1357,7 +1302,7 @@ const Payment = () => {
                 className="w-full rounded-lg h-12"
                 showSearch
                 optionFilterProp="children"
-                disabled={!selectedDistrict}
+                disabled={!selectedProvince}
                 dropdownStyle={{ borderRadius: "8px" }}
               >
                 {wards.map((ward) => (
@@ -1367,23 +1312,23 @@ const Payment = () => {
                 ))}
               </Select>
             </Item>
-            <Item
-              name="address"
-              label={
-                <span className="text-base font-semibold text-gray-700">
-                  Địa chỉ nhà
-                </span>
-              }
-              rules={[
-                { required: true, message: "Vui lòng nhập địa chỉ nhà!" },
-              ]}
-            >
-              <Input
-                placeholder="Nhập địa chỉ nhà"
-                className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
-              />
-            </Item>
           </div>
+          <Item
+            name="address"
+            label={
+              <span className="text-base font-semibold text-gray-700">
+                Địa chỉ nhà
+              </span>
+            }
+            rules={[
+              { required: true, message: "Vui lòng nhập địa chỉ nhà!" },
+            ]}
+          >
+            <Input
+              placeholder="Nhập địa chỉ nhà"
+              className="w-full rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
+            />
+          </Item>
         </Form>
       </Modal>
 
@@ -1473,32 +1418,6 @@ const Payment = () => {
               </Select>
             </Item>
             <Item
-              name="district"
-              label={
-                <span className="text-base font-semibold text-gray-700">
-                  Quận/Huyện
-                </span>
-              }
-              rules={[{ required: true, message: "Vui lòng chọn quận/huyện!" }]}
-            >
-              <Select
-                placeholder="Chọn quận/huyện"
-                className="rounded-lg h-12"
-                showSearch
-                optionFilterProp="children"
-                onChange={(value) => setSelectedDistrict(value)}
-                dropdownStyle={{ borderRadius: "8px" }}
-              >
-                {districts.map((district) => (
-                  <Select.Option key={district.code} value={district.code}>
-                    {district.name}
-                  </Select.Option>
-                ))}
-              </Select>
-            </Item>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <Item
               name="ward"
               label={
                 <span className="text-base font-semibold text-gray-700">
@@ -1512,6 +1431,7 @@ const Payment = () => {
                 className="rounded-lg h-12"
                 showSearch
                 optionFilterProp="children"
+                disabled={!selectedProvince}
                 dropdownStyle={{ borderRadius: "8px" }}
               >
                 {wards.map((ward) => (
@@ -1521,23 +1441,23 @@ const Payment = () => {
                 ))}
               </Select>
             </Item>
-            <Item
-              name="address"
-              label={
-                <span className="text-base font-semibold text-gray-700">
-                  Địa chỉ nhà
-                </span>
-              }
-              rules={[
-                { required: true, message: "Vui lòng nhập địa chỉ nhà!" },
-              ]}
-            >
-              <Input
-                placeholder="Nhập địa chỉ nhà"
-                className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
-              />
-            </Item>
           </div>
+          <Item
+            name="address"
+            label={
+              <span className="text-base font-semibold text-gray-700">
+                Địa chỉ nhà
+              </span>
+            }
+            rules={[
+              { required: true, message: "Vui lòng nhập địa chỉ nhà!" },
+            ]}
+          >
+            <Input
+              placeholder="Nhập địa chỉ nhà"
+              className="rounded-lg border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-[#FFA500] focus:border-transparent"
+            />
+          </Item>
         </Form>
       </Modal>
     </>
